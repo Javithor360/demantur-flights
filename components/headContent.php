@@ -4,6 +4,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../src/css/global_index.css" >
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/f008f6fb10.js" crossorigin="anonymous"></script>
     <title>Demantur Flights - <?php echo $title ?></title>
 
     <?php 
