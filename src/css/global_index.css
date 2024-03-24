@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+
 /* Paleta de Colores */
 :root {
     --main: #76ABAE;
@@ -13,10 +15,12 @@ html {
 
 body {
     font-size: 16px;
-    font-family: 'Krub', sans-serif;
+    font-family: "Red Hat Display", sans-serif;
 }
 
 /*------------------------------------------*/
+
+/* Elementos del hero correspondientes al buscador */
 
 .hero {
     background-image: url("../img/hero_banner.png");
@@ -43,6 +47,8 @@ body {
     font-size: 24px;
 }
 
+/* Elementos correspondientes a la primera card con la oferta principal */
+
 .main-deal {
     display: flex;
     justify-content: center;
@@ -62,7 +68,7 @@ body {
 
 .main-deal-img img {
     width: 100%;
-    height: 400px;
+    height: 100%;
     border-top-left-radius: 20px; /* Agrega esquinas redondeadas a la imagen */
     border-bottom-left-radius: 20px;
 }
@@ -123,4 +129,83 @@ body {
   
 .button:hover {
     background-color: #333;
+}
+
+/* Ofertas secundarias */
+
+.offer-cards-container {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-offers {
+    margin-top: 100px;
+    margin-bottom: 150px;
+}
+
+.main-offers h2 {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.offer-card {
+    width: 350px;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 300ms;
+}
+
+.offer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.offer-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .3s ease-in-out
+}
+
+.offer-card img:hover {
+    transform: scale(1.1);
+}
+
+.offer-card .offer-content {
+    box-sizing: border-box;
+    width: 100%;
+    position: absolute;
+    padding: 30px 20px 20px 20px;
+    height: auto;
+    bottom: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+    z-index: 1;
+}
+
+.offer-card .offer-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: -18px;
+}
+
+.offer-card .offer-desc {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.offer-card .offer-desc .offer-price {
+    font-weight: bold;
+    font-size: 20px;
 }

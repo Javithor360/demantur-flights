@@ -4,6 +4,8 @@
     box-sizing: border-box;
 }
 
+/* NAVBAR */
+
 .navbar {
     background-color: #fff;
     padding: 10px 0;
@@ -47,4 +49,29 @@
     color: #31363F;
     text-decoration: none;
     font-weight: bold;
+}
+
+/* FOOTER */
+.footer {
+    background-color: var(--gray);
+    padding: 10px 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.foot-container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.foot-container img {
+    max-height: 50px;
+    width: auto;
+    max-width: 80%;
 }

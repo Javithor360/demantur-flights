@@ -36,8 +36,56 @@
                 </div>
             </div>
         </section>
+
+        <section class="main-offers">
+            <h2>Ofertas que no te puedes perder</h2>
+
+            <div class="offer-cards-container">
+
+                <a href="#">
+                    <div class="offer-card">
+                        <div class="offer-content">
+                            <p class="offer-title">Tegucigalpa</p>
+                            <div class="offer-desc">
+                                <p class="offer-label">Precios desde</p>
+                                <p class="offer-price">USD 1</p>
+                            </div>
+                        </div>
+                        <img src="../src/img/tegucigalpa.webp" alt="Tegucigalpa">
+                    </div>
+                </a>
+
+                <a href="#">
+                    <div class="offer-card">
+                        <div class="offer-content">
+                            <p class="offer-title">San José</p>
+                            <div class="offer-desc">
+                                <p class="offer-label">Precios desde</p>
+                                <p class="offer-price">USD 1</p>
+                            </div>
+                        </div>
+                        <img src="../src/img/sanjose.webp" alt="San José">
+                    </div>
+                </a>
+
+                <a href="#">
+                    <div class="offer-card">
+                        <div class="offer-content">
+                            <p class="offer-title">Ciudad de Panamá</p>
+                            <div class="offer-desc">
+                                <p class="offer-label">Precios desde</p>
+                                <p class="offer-price">USD 1</p>
+                            </div>
+                        </div>
+                        <img src="../src/img/ciudaddepanama.jpg" alt="Ciudad de Panamá">
+                    </div>
+                </a>
+
+            </div>
+        </section>
     </main>
 
+    <?php include_once(__DIR__."/../components/footer.php") ?>
 </body>
 
 </html>
