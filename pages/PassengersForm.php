@@ -13,27 +13,28 @@
             <div class="subdivision"></div>
             <p class="simpleText">Es de vital importancia que proporciones los datos correctos según los documentos de identidad correspondientes de cada pasajero</p>
         </div>
-        <form action="">
+        <form action="SeatSelection.php">
             <div class="inputCard shadow-xl">
                 <p class="inputCardTitle">Pasajero 1:</p>
                 <hr class="hrStyleOne">
                 <div class="inputsContainer">
                     <div class="custom_input">
                         <i class="fa-regular fa-user input_icon"></i>
-                        <input class="input" type="text" placeholder="Nombres" title="Por favor, ingrese un nombre válido (mínimo 3 letras)" required>
+                        <input class="input" type="text" placeholder="Nombres" pattern="[A-Za-záéíóúÁÉÍÓÚ\s]{3,}" title="Por favor, ingrese nombres válido (mínimo 3 letras)" required>
                     </div>
                     <div class="custom_input">
                         <i class="fa-regular fa-user input_icon"></i>
-                        <input class="input" type="text" placeholder="Apellidos">
+                        <input class="input" type="text" placeholder="Apellidos" pattern="[A-Za-záéíóúÁÉÍÓÚ\s]{3,}" title="Por favor, ingrese apellidos válido (mínimo 3 letras)" required>
                     </div>
                 </div>
                 <div class="custom_input">
                     <i class="fa-regular fa-id-card input_icon"></i>
-                    <input class="input" type="text" placeholder="Documento de identidad">
+                    <input class="input" type="text" placeholder="Documento de identidad (DNI) o Pasaporte" pattern="[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*" title="Debe contener letras, números o caracteres correctos y no puede terminar con guión" required>
+
                 </div>
             </div>
             <div class="btnContainer">
-                <a class="continueBtn"> Continuar </a>
+                <button value="Continuar" class="continueBtn">Continuar</button>
             </div>
 
         </form>
