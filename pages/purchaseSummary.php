@@ -1,6 +1,6 @@
 <html lang="es">
 <?php 
-    $title = "Pasajeros";
+    $title = "Información de la Reserva";
     $arg = "<link rel='stylesheet' href='../src/css/purchaseSummary.css'>";
     require_once(__DIR__."/../components/headContent.php"); 
 ?>
