@@ -1,0 +1,155 @@
+.summary-main {
+    margin: 5% 25%;
+    padding: 30px;
+    min-height: 90vh;
+    border: 1px solid #333;
+    border-radius: 20px;
+}
+
+.summary-title {
+    background-color: var(--gray);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.summary-title h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.summary-title-img {
+    width: 300px;
+    height: 60px;
+}
+
+.summary-title img {
+    width: 100%;
+    height: 100%;
+}
+
+.summary-header {
+    padding: 10px;
+}
+
+.summary-head-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray);
+}
+
+.summary-head-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.summary-head-id {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    font-size: 20px;
+}
+
+.summary-head-id p {
+    padding: 10px;
+    background-color: var(--gray);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.summary-flights, .summary-passengers, .summary-payment {
+    margin: 20px 0;
+}
+
+.summary-main table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.summary-main table, th, td {
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.summary-main th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.summary-main th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.summary-main th, td {
+    padding: 15px;
+}
+
+.summary-main th {
+    background-color: var(--gray);
+    color: #fff;
+    font-weight: bold;
+}
+
+.summary-main tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.summary-payment tfoot td {
+    font-weight: bold;
+}
+
+.summary-pay-cont {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.summary-pay-receipt {
+    width: 100%;
+}
+
+.summary-pay-info {
+    width: 50%;
+}
+
+.summary-pay-info {
+    margin-left: 30px;
+    font-size: 18px;
+    font-style: italic;
+}
+
+
+.summary-pay-info p:last-child {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.summary-return {
+    text-align: center;
+}
+
+.return-button {
+    padding: 10px 20px;
+    background-color: var(--gray);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.return-button:hover {
+    filter: brightness(150% );
+}
+
+/* .summary-main tr:hover {
+    background-color: #ddd;
+} */

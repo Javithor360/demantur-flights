@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="../src/css/navfoot.css">
-
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-logo">
