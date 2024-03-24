@@ -1,0 +1,126 @@
+/* Paleta de Colores */
+:root {
+    --main: #76ABAE;
+    --sec: #EEEEEE;
+    --black: #222831;
+    --gray: #31363F;
+}
+
+/* Definiendo la equivalencia de 1rem = 10px */
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 16px;
+    font-family: 'Krub', sans-serif;
+}
+
+/*------------------------------------------*/
+
+.hero {
+    background-image: url("../img/hero_banner.png");
+    background-size: cover;
+    background-position: center;
+    height: 269px;
+    padding: 80px 0;
+
+    color: #fff;
+    text-align: center;
+}
+
+.hero-cont {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-cont h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-cont p {
+    font-size: 24px;
+}
+
+.main-deal {
+    display: flex;
+    justify-content: center;
+    max-width: 60%;
+    margin: 0 auto;
+}
+  
+.main-deal-cont {
+    display: flex;
+    background-color: #70c6ca;
+    border-radius: 20px;
+}
+
+.main-deal-img {
+    width: 70%;
+}
+
+.main-deal-img img {
+    width: 100%;
+    height: 400px;
+    border-top-left-radius: 20px; /* Agrega esquinas redondeadas a la imagen */
+    border-bottom-left-radius: 20px;
+}
+
+.main-deal-info {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 30px;
+    color: #fff;
+    border-bottom-right-radius: 20px;
+    background: linear-gradient(to top, #06aed8 0%, #70c6ca 15%, transparent 50%);
+}
+
+.top-info h2 {
+    font-size: 36px;
+    font-weight: bold;
+}
+  
+.top-info p {
+    font-size: 16px;
+    margin-top: 8px;
+}
+  
+.bottom-info {
+    margin-top: 20px;
+    display: flex; /* Mostrar como flexbox */
+    align-items: center; /* Centrar verticalmente los elementos */
+}
+  
+.price-info {
+    flex-grow: 1; /* Permite que el texto ocupe todo el espacio disponible */
+    margin-right: 10px; /* Agrega margen derecho para separar del botón */
+}
+  
+.price-info p {
+    margin-bottom: 8px;
+}
+  
+.price {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 0;
+}
+  
+.button {
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+  
+.button:hover {
+    background-color: #333;
+}

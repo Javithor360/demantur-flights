@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #fff;
+    padding: 10px 0;
+    /* margin: auto 360px; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.nav-container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo img {
+    max-height: 50px;
+    width: auto;
+    max-width: 80%;
+}
+
+.nav-menu ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px; /* Reducido el valor de gap para aumentar el espacio entre los elementos */
+}
+
+.nav-menu ul li:first-child {
+    margin-left: 0;
+}
+
+.nav-menu ul li a {
+    color: #31363F;
+    text-decoration: none;
+    font-weight: bold;
+}
