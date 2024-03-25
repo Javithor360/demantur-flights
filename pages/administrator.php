@@ -6,7 +6,13 @@
     <title>Agregar Vuelo</title>
     <link rel="stylesheet" href="../src/css/admin.css">
     <link rel="stylesheet" href="../src/css/global_index.css">
+    <link rel="stylesheet" href="../src/css/">
 </head>
+<?php 
+    $title = "Inicio";
+    require_once(__DIR__."/../components/headContent.php"); 
+?>
+
 <body>
 <?php include_once(__DIR__."/../components/navbar.php") ?>
     <div class="container">
