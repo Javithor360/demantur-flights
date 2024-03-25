@@ -12,9 +12,10 @@
         <section class="hero">
             <div class="hero-cont">
                 <h1>Buscar vuelo</h1>
-                <p>Aquí va el componente de búsqueda</p>
+                <?php include_once(__DIR__."/../components/search.php") ?>
             </div>
         </section>
+       
 
         <section class="main-deal">
             <div class="main-deal-cont">
