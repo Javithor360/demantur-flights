@@ -1,7 +1,7 @@
 <html lang="es">
 <?php 
-    $title = "Pasajeros";
-    $arg = "<link rel='stylesheet' href='../src/css/SeatSelection.css'>";
+    $title = "Asientos";
+    $arg = "<link rel='stylesheet' href='../src/css/seatSelection.css'>";
     require_once(__DIR__."/../components/headContent.php"); 
 ?>
 <body>
@@ -39,8 +39,7 @@
         </div>
     </div>
     <?php include_once(__DIR__."/../components/footer.php") ?>
-</body>
-<script>
+    <script>
         const seatMap = document.getElementById('seatMap');
         const passengerList = document.getElementById('passengerList');
         const rows = 10; // Number of rows
@@ -135,3 +134,4 @@
             passenger.addEventListener('click', selectPassenger);
         });
     </script>
+</body>

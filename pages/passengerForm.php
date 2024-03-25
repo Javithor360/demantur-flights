@@ -1,7 +1,7 @@
 <html lang="es">
 <?php 
     $title = "Pasajeros";
-    $arg = "<link rel='stylesheet' href='../src/css/PassengersForm.css'>";
+    $arg = "<link rel='stylesheet' href='../src/css/passengersForm.css'>";
     require_once(__DIR__."/../components/headContent.php"); 
 ?>
 <body>
@@ -13,7 +13,7 @@
             <div class="subdivision"></div>
             <p class="simpleText">Es de vital importancia que proporciones los datos correctos según los documentos de identidad correspondientes de cada pasajero</p>
         </div>
-        <form id="passengerForm" action="SeatSelection.php" onsubmit="return validateForm()">
+        <form id="passengerForm" action="seatsSelection.php" onsubmit="return validateForm()">
             <div class="inputCard shadow-xl">
                 <p class="inputCardTitle">Pasajero 1:</p>
                 <hr class="hrStyleOne">
@@ -40,7 +40,7 @@
             </div>
         </form>
     </main>
-
+    <?php include_once(__DIR__."/../components/footer.php") ?>
     <script>
         function validateForm() {
             var isValid = true;
@@ -75,6 +75,5 @@
             return isValid;
         }
     </script>
-    <?php include_once(__DIR__."/../components/footer.php") ?>
 </body>
 </html>
