@@ -10,7 +10,8 @@
                 <li><a href="./index.php">Inicio</a></li>
                 <li><a href="#">Buscar vuelos</a></li>
                 <li><a href="./bookedFlights.php">Vuelos reservados</a></li>
-                <li><a href="#">Iniciar sesión</a></li>
+                <li><a href="./payments.php">Pagos</a></li>
+                <li><a href="./login.php">Iniciar sesión</a></li>
             </ul>
         </div>
     </div>
