@@ -116,7 +116,7 @@
         </section>
 
         <section class="summary-return">
-            <a href="#"><button class="return-button">Entendido</button></a>
+            <a href="./index.php"><button class="return-button">Entendido</button></a>
         </section>
     </main>
 

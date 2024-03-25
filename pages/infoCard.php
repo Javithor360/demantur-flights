@@ -5,12 +5,6 @@
     <title>Payment Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-    </style>
 </head>
 <body class="bg-gray-100">
     <div class="min-h-screen flex items-center justify-center">
@@ -60,12 +54,16 @@
                 </div>
             </div>
             <div class="flex items-center justify-between">
-                <button class="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded" type="button">
-                    Volver
-                </button>
-                <button class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" type="button">
-                    Añadir tarjeta
-                </button>
+                <a href="./payments.php">
+                    <button class="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded" type="button">
+                        Volver
+                    </button>
+                </a>
+                <a href="./purchaseSummary.php">
+                    <button class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" type="button">
+                        Añadir tarjeta
+                    </button>
+                </a>
             </div>
         </div>
     </div>
