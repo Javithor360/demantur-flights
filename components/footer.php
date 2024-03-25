@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="../src/css/navfoot.css">
-
 <footer class="footer">
     <div class="foot-container">
         <p class="copyright">Copyright &copy; Demantur 2024</p>

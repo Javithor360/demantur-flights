@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="../src/css/navfoot.css">
-
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-logo">
@@ -11,6 +9,7 @@
             <ul>
                 <li><a href="./index.php">Inicio</a></li>
                 <li><a href="#">Buscar vuelos</a></li>
+                <li><a href="./bookedFlights.php">Vuelos reservados</a></li>
                 <li><a href="#">Iniciar sesión</a></li>
             </ul>
         </div>
