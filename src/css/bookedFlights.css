@@ -1,0 +1,160 @@
+body {
+    background-color: rgb(243 244 246) !important;
+}
+.heroContainer {
+    width: 100%;
+    height: 50rem;
+    position: relative;
+    background-image: url("../img/booked_flight_hero.jpg");
+    background-size: cover;
+}
+.dimmedBg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #00000033;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.heroText {
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 700;
+}
+.ticketsContainer {
+    width: 120rem;
+    height: 70rem;
+    background-color: #fff;
+    transform: translateY(-8rem);
+    margin: auto;
+    border-radius: 2rem;
+    padding-top: 6rem;
+}
+.flightCard {
+    width: 90rem;
+    height: 18rem;
+    margin: 5rem auto 0 auto;
+    border-radius: 2rem;
+    border: 1px solid #dfdfdf;
+    overflow: hidden;
+}
+.plane-icon-p {
+    color: #76ABAE;
+    font-size: 3rem;
+    margin-right: 3rem;
+}
+.countryTitle {
+    /* margin: 1rem 0 0 1rem; */
+    font-weight: 700;
+    color: #fff;
+}
+.separator {
+    width: 9rem;
+    height: 2px;
+    background-color: #31363F;
+    margin: 0 1rem 0 1rem;
+}
+.contentI {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin: 3rem 0 0 1rem;
+    position: relative;
+    height: fit-content;
+}
+.hourT {
+    font-size: 2.5rem;
+}
+.headerC {
+    width: 100%;
+    background-color: #31363F;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    justify-content: space-between;
+}
+.aditionalinfoC {
+    position: absolute;
+    right: 220;
+    text-align: end;
+    padding-left: 3rem;
+    border-left: 1px solid #dfdfdf;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.aditionalinfoCC {
+    position: absolute;
+    right: 20;
+    text-align: end;
+    padding-left: 3rem;
+    border-left: 1px solid #dfdfdf;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    height: 9rem;
+}
+.greenText {
+    color: rgb(144, 209, 47);
+}
+.grayText {
+    color: #31363F;
+}
+.btnShowDetails {
+    color: #76ABAE;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+.style-one {
+    border: 0;
+    height: 1px;
+    width: 75%;
+    margin: auto;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+ /*modal */
+ .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    right: 20;
+    top: 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
