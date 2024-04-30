@@ -1,12 +1,13 @@
 <?php 
 
 $title = "Admin";
+$focus = "Inicio";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require_once("../components/headContent.php") ?>
+<?php require_once("./components/adminHead.php") ?>
 
 <body>
     <main class="flex mr-5">

@@ -1,4 +1,5 @@
 <?php 
+    $focus = "Destino";
     $title = "Añadir destinos";
     $description = "Defina los destinos, tanto de salida o de llegada según disponibilidad";
 ?>
@@ -6,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require_once("../components/headContent.php") ?>
+<?php require_once("./components/adminHead.php") ?>
 
 <body>
 <main class="flex">

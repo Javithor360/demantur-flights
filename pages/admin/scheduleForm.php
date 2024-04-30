@@ -1,11 +1,12 @@
 <?php 
+$focus = "Horario";
 $title = "Añadir horarios";
 $description = "Defina los horarios del vuelo y detalles del origen y destino";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require_once("../components/headContent.php") ?>
+<?php require_once("./components/adminHead.php") ?>
 
 <body>
     <main class="flex">
