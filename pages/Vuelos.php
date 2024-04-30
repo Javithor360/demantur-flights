@@ -2,13 +2,13 @@
 
 <?php 
     $title = "Vuelos";
-    $arg="<link rel='stylesheet' href='../src/css/vuelos.css'>";
+    $arg="<link rel='stylesheet' href='./assets/css/vuelos.css'>";
 
-    require_once(__DIR__."/../components/headContent.php"); 
+    include_once("./components/headContent.php"); 
 ?>
 
 <body>
-    <?php include_once(__DIR__."/../components/navbar.php") ?>
+    <?php include_once("./components/navbar.php") ?>
     <main class="main-container">
     <p class="uppercase mx-10 mt-10">Vuelos Disponibles</p>
     <p class="uppercase mx-10 mt-10">Ida:San Salvador a Bolivia</p>
@@ -167,7 +167,7 @@
 </main>
 
 
-    <?php include_once(__DIR__."/../components/footer.php") ?>
+    <?php include_once("./components/footer.php") ?>
 </body>
 
 </html>

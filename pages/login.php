@@ -2,12 +2,12 @@
 
 <?php 
     $title = "Inicio Sesion - Demantur Flights";
-    $arg = "<link rel='stylesheet' href='../src/css/login.css'>";
-    require_once(__DIR__."/../components/headContent.php"); 
+    $arg = "<link rel='stylesheet' href='./assets/css/login.css'>";
+    include_once("./components/headContent.php"); 
 ?>
 <body>
   <div class="main_container">
-    <?php include_once(__DIR__."/../components/navbar.php") ?>
+    <?php include_once("./components/navbar.php") ?>
     <div class="content_container">
       <div class="container-login" id="container">
           <div class="form-container sign-up">
@@ -48,6 +48,6 @@
       </div>
     </div>
   </div>
-  <script src="../src/js/login_script.js"></script>
+  <script src="./assets/js/login_script.js"></script>
 </body>
 </html>

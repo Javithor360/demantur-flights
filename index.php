@@ -1,13 +1,11 @@
 <?php 
     $title = "Inicio";
-    $dipath = "./pages/" // % PARÁMETRO PARA DEFINIR LA RUTA DE LAS URL DE LOS COMPONENTES IMPORTADOS; NO MODIFICAR AGREGAR SI NO ES NECESARIO
+    $dipath = "./pages/"
 ?>
 
 <html lang="en">
 
-<?php 
-    require_once("./pages/components/headContent.php"); 
-?>
+<?php include_once("./pages/components/headContent.php"); ?>
 
 <body>
     <?php include_once("./pages/components/navbar.php") ?>

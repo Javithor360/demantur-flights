@@ -6,11 +6,11 @@
     <title>Pagar y confirmar reserva</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="../src/css/navfoot.css">
+    <link rel="stylesheet" href="./assets/css/navfoot.css">
 </head>
 
 <body class="bg-gray-100">
-    <?php include_once("../components/navbar_solo.php"); ?>
+    <?php include_once("./components/navbar_solo.php"); ?>
 
     <div class="container mx-auto px-4 py-24 min-h-[90vh]">
         <div class="flex flex-col lg:flex-row justify-between bg-white shadow-lg rounded-lg overflow-hidden">
@@ -108,7 +108,7 @@
         </div>
     </div>
 
-    <?php include_once("../components/footer.php"); ?>
+    <?php include_once("./components/footer.php"); ?>
 </body>
 
 </html>

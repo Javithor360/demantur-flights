@@ -1,11 +1,11 @@
 <html lang="es">
 <?php 
     $title = "Asientos";
-    $arg = "<link rel='stylesheet' href='../src/css/bookedFlights.css'>";
-    require_once(__DIR__."/../components/headContent.php"); 
+    $arg = "<link rel='stylesheet' href='./assets/css/bookedFlights.css'>";
+    include_once("./components/headContent.php"); 
 ?>
 <body>
-    <?php include_once(__DIR__."/../components/navbar.php") ?>
+    <?php include_once("./components/navbar.php") ?>
     <div class="heroContainer">
         <div class="heroImg"></div>
         <div class="dimmedBg">
@@ -72,7 +72,7 @@
             </div>
         </div>
     </div>
-    <?php include_once(__DIR__."/../components/footer.php") ?>
+    <?php include_once("./components/footer.php") ?>
 
     <!-- Modal -->
     <div id="detailsModal" class="modal">

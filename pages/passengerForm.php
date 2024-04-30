@@ -1,12 +1,12 @@
 <html lang="es">
 <?php 
     $title = "Pasajeros";
-    $arg = "<link rel='stylesheet' href='../src/css/passengersForm.css'>";
-    require_once(__DIR__."/../components/headContent.php"); 
+    $arg = "<link rel='stylesheet' href='./assets/css/passengerForm.css'>";
+    include_once("./components/headContent.php"); 
 ?>
 <body>
-    <?php include_once(__DIR__."/../components/navbar.php") ?>
-    <main class="mainContainer">
+    <?php include_once("./components/navbar.php") ?>
+    <main class="mainContainer min-h-[85vh]">
         <p class="psgTitle marginL">Ingresa la información de los pasajeros</p>
         <div class="splitMsgContainer marginL">
             <i class="fa-solid fa-pen-clip lightIcon"></i>
@@ -40,7 +40,7 @@
             </div>
         </form>
     </main>
-    <?php include_once(__DIR__."/../components/footer.php") ?>
+    <?php include_once("./components/footer.php") ?>
     <script>
         function validateForm() {
             var isValid = true;

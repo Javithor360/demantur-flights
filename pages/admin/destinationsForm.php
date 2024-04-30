@@ -1,18 +1,19 @@
 <?php 
-$title = "Añadir destinos";
-$description = "Defina los destinos, tanto de salida o de llegada según disponibilidad";
+    $title = "Añadir destinos";
+    $description = "Defina los destinos, tanto de salida o de llegada según disponibilidad";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require_once("../../components/headContent.php") ?>
+<?php require_once("../components/headContent.php") ?>
 
 <body>
 <main class="flex">
-        <?php require_once("components/sidebar.php") ?>
+        <?php require_once("./components/sidebar.php") ?>
         <section class="w-full flex">
                 <div class="w-[60%] pl-6 pt-8">
-                    <?php require_once("components/pageHeader.php") ?>
+                    <?php require_once("./components/pageHeader.php") ?>
                     <form action="" class="w-[100%] 2xl:w-[90%] h-fit flex flex-col gap-[2rem]">
                         <div class="bg-[#EEEEEE] h-[3rem] w-full rounded-xl flex border-[2px] border-transparent focus-within:shadow-md focus-within:bg-white focus-within:border-[#e0e0e0] focus-within:border-[2px] hover:border-[2px] hover:border-[#e0e0e0] ease-in duration-100 overflow-hidden">
                             <div class="h-full pl-6 pr-4 flex items-center justify-center">
@@ -54,7 +55,7 @@ $description = "Defina los destinos, tanto de salida o de llegada según disponi
                         </div>
                     </form>
                 </div>
-                <div class="w-[40%] bg-cover bg-no-repeat" style="background-image: url(../../src/img/world.png)"></div>
+                <div class="w-[40%] bg-cover bg-no-repeat" style="background-image: url(../assets/img/world.png)"></div>
                 
         </section>
     </main>

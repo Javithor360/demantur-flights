@@ -1,18 +1,18 @@
 <html lang="es">
 <?php 
     $title = "Información de la Reserva";
-    $arg = "<link rel='stylesheet' href='../src/css/purchaseSummary.css'>";
-    require_once(__DIR__."/../components/headContent.php"); 
+    $arg = "<link rel='stylesheet' href='./assets/css/purchaseSummary.css'>";
+    include_once("./components/headContent.php"); 
 ?>
 
 <body>
-    <?php include_once(__DIR__."/../components/navbar.php") ?>
+    <?php include_once("./components/navbar.php") ?>
 
     <main class="summary-main">
         <section class="summary-title">
             <h1>¡Todo listo!</h1>
             <div class="summary-title-img">
-                <img src="../src/img/logo_full_white.png" alt="Demantur Flights">
+                <img src="./assets/img/logo_full_white.png" alt="Demantur Flights">
             </div>
         </section>
 
@@ -120,7 +120,7 @@
         </section>
     </main>
 
-    <?php include_once(__DIR__."/../components/footer.php") ?>
+    <?php include_once("./components/footer.php") ?>
 </body>
 
 </html>

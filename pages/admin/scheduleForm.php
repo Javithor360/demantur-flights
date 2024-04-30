@@ -5,14 +5,14 @@ $description = "Defina los horarios del vuelo y detalles del origen y destino";
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require_once("../../components/headContent.php") ?>
+<?php require_once("../components/headContent.php") ?>
 
 <body>
     <main class="flex">
-        <?php require_once("components/sidebar.php") ?>
+        <?php require_once("./components/sidebar.php") ?>
         <section class="w-full flex">
                 <div class="w-[100%] pl-6 pt-8">
-                    <?php require_once("components/pageHeader.php") ?>
+                    <?php require_once("./components/pageHeader.php") ?>
                     <form action="" class="w-[100%] 2xl:w-[90%] h-fit flex flex-col gap-[2rem] mb-12">
                         <div class="flex gap-[1rem] w-[80%]">
                             <div class="w-[50%]">

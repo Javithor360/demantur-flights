@@ -1,11 +1,11 @@
 <html lang="es">
 <?php 
     $title = "Asientos";
-    $arg = "<link rel='stylesheet' href='../src/css/seatSelection.css'>";
-    require_once(__DIR__."/../components/headContent.php"); 
+    $arg = "<link rel='stylesheet' href='./assets/css/SeatSelection.css'>";
+    include_once("./components/headContent.php"); 
 ?>
 <body>
-    <?php include_once(__DIR__."/../components/navbar.php") ?>
+    <?php include_once("./components/navbar.php") ?>
     <div class="siteLayout">
         <main class="mainContainer">
             <div>
@@ -38,7 +38,7 @@
 
         </div>
     </div>
-    <?php include_once(__DIR__."/../components/footer.php") ?>
+    <?php include_once("./components/footer.php") ?>
     <script>
         const seatMap = document.getElementById('seatMap');
         const passengerList = document.getElementById('passengerList');
@@ -135,3 +135,4 @@
         });
     </script>
 </body>
+</html>

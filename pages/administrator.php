@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Vuelo</title>
-    <link rel="stylesheet" href="../src/css/admin.css">
-    <link rel="stylesheet" href="../src/css/global_index.css">
-    <link rel="stylesheet" href="../src/css/">
+    <link rel="stylesheet" href="./assets/css/admin.css">
+    <link rel="stylesheet" href="./assets/css/global_index.css">
 </head>
 <?php 
     $title = "Inicio";
-    require_once(__DIR__."/../components/headContent.php"); 
+    include_once("./components/headContent.php"); 
 ?>
 
 <body>
-<?php include_once(__DIR__."/../components/navbar.php") ?>
-    <div class="container">
+<?php include_once("./components/navbar.php") ?>
+    <div class="container mt-12">
         <form id="flight-form">
             <h1 class="form-title">Agregar Vuelo</h1>
             <div class="form-row">
