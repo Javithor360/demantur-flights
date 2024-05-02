@@ -5,6 +5,8 @@ CREATE TABLE demantur_flights . usuario (
   nombres VARCHAR(300),
   apellidos VARCHAR(300),
   documento_identidad CHAR(10), -- DUI
+  password VARCHAR(255),
+  email VARCHAR(255),
   PRIMARY KEY(id_usuario)
 );
 
