@@ -2,6 +2,7 @@
     $focus = "Destino";
     $title = "Añadir destinos";
     $description = "Defina los destinos, tanto de salida o de llegada según disponibilidad";
+    $type = "Creación de Vuelo";
 ?>
 
 <!DOCTYPE html>

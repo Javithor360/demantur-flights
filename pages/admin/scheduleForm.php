@@ -1,7 +1,8 @@
 <?php 
-$focus = "Horario";
-$title = "Añadir horarios";
-$description = "Defina los horarios del vuelo y detalles del origen y destino";
+    $focus = "Horario";
+    $title = "Añadir horarios";
+    $description = "Defina los horarios del vuelo y detalles del origen y destino";
+    $type = "Creación de Vuelo";
 ?>
 <!DOCTYPE html>
 <html lang="en">

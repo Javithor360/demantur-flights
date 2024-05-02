@@ -6,8 +6,8 @@
     $focus_element_class = "flex items-center rounded-md p-3 transition ease-in-out duration-350 bg-white text-[#31363F]";
 ?>
 
-<aside>
-    <nav class="bg-[#31363F] text-white p-6 h-[100vh] min-w-[30vh] max-w-[30vh] text-lg flex flex-col justify-between">
+<aside class="">
+    <nav class="sticky top-0 bg-[#31363F] text-white p-6 h-[100vh] min-w-[30vh] max-w-[30vh] text-lg flex flex-col justify-between">
         <div class="head flex flex-col items-center my-5">
             <img src="<?php echo $dipath . "../assets/img/pfp.jpg" ?>" alt="Foto" class="rounded-full w-36 h-36 mb-3">
             <img src="<?php echo $dipath . "../assets/img/logo_full_white.png" ?>" alt="Logo" class="">
