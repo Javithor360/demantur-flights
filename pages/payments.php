@@ -60,7 +60,8 @@
                         <input
                             class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50 cursor-pointer"
                             type="submit" value="Confirmar y pagar" />
-                        <p class="text-sm text-green-600 ml-4"><i class="fas fa-lock mr-1"></i>Usamos métodos de confianza para procesar tus pagos de forma segura.</p>
+                        <p class="text-sm text-green-600 ml-4"><i class="fas fa-lock mr-1"></i>Usamos métodos de
+                            confianza para procesar tus pagos de forma segura.</p>
                     </div>
                 </form>
             </div>
