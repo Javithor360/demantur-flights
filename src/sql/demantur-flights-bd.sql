@@ -1,7 +1,9 @@
 CREATE SCHEMA IF NOT EXISTS demantur_flights DEFAULT CHARACTER SET utf8;
 
+DROP DATABASE demantur_flights;
+
 CREATE TABLE demantur_flights . usuario (
-  id_usuario INT NOT NULL,
+  id_usuario INT NOT NULL AUTO_INCREMENT,
   nombres VARCHAR(300),
   apellidos VARCHAR(300),
   documento_identidad CHAR(10), -- DUI
@@ -11,20 +13,20 @@ CREATE TABLE demantur_flights . usuario (
 );
 
 CREATE TABLE demantur_flights . aerolinea (
-  id_aerolinea INT NOT NULL,
+  id_aerolinea INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(300) NOT NULL, -- TEXT (avianca)
   PRIMARY KEY(id_aerolinea)
 );
 
 CREATE TABLE demantur_flights . destino (
-  id_destino INT NOT NULL,
+  id_destino INT NOT NULL AUTO_INCREMENT,
   lugar TEXT NOT NULL,-- TEXTO (miami)
   aeropuerto TEXT NOT NULL, -- TEXTO (national miami airport)
   PRIMARY KEY (id_destino)
 );
 
-CREATE TABLE demantur_flights . avion ( 
-  id_avion INT NOT NULL,
+CREATE TABLE demantur_flights . avion (
+  id_avion INT NOT NULL AUTO_INCREMENT,
   codigo_avion CHAR(4) NOT NULL, -- CHAR: AV01
   id_aerolinea INT NOT NULL, -- FK_AEROLINEA
   id_ultima_ubicacion INT NOT NULL, -- FK_DESTINO
@@ -34,7 +36,7 @@ CREATE TABLE demantur_flights . avion (
 );
 
 CREATE TABLE demantur_flights . horario (
-  id_horario INT NOT NULL, 
+  id_horario INT NOT NULL AUTO_INCREMENT,
   id_destino INT NOT NULL, -- FK_DESTINO
   id_origen INT NOT NULL, -- FK_DESTINO
   hora_salida DATETIME NOT NULL, -- DATETIME
@@ -57,7 +59,7 @@ CREATE TABLE demantur_flights . vuelo (
 );
 
 CREATE TABLE demantur_flights . asiento (
-  id_asiento INT NOT NULL,
+  id_asiento INT NOT NULL AUTO_INCREMENT,
   numero_asiento CHAR(3) NOT NULL, -- CHAR: A1
   id_vuelo INT NOT NULL,-- FK_VUELO
   PRIMARY KEY (id_asiento),
@@ -65,7 +67,7 @@ CREATE TABLE demantur_flights . asiento (
 );
 
 CREATE TABLE demantur_flights . boleto (
-  id_boleto INT NOT NULL,
+  id_boleto INT NOT NULL AUTO_INCREMENT,
   id_comprador INT NOT NULL, -- FK_USUARIO
   codigo_boleto CHAR(16) NOT NULL, -- CHAR: VL20240321V01N01
   fecha_compra DATETIME NOT NULL,
@@ -77,3 +79,4 @@ CREATE TABLE demantur_flights . boleto (
   FOREIGN KEY(id_asiento) REFERENCES demantur_flights . asiento(id_asiento)
 );
 
+SELECT * FROM demantur_flights.usuario;

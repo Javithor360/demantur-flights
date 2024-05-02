@@ -8,7 +8,7 @@ class Database
 
     private function __construct()
     {
-        // $this->connection = new mysqli($_ENV['DB_HOST'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'] , $_ENV['DB_DATABASE']);
+//      $this->connection = new mysqli($_ENV['DB_HOST'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'] , $_ENV['DB_DATABASE']);
         $this->connection = new mysqli("localhost", "root", "12345" , "demantur_flights");
         if ($this->connection->connect_error) {
             die("Error de conexión: " . $this->connection->connect_error);
