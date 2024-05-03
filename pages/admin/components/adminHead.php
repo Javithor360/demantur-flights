@@ -4,7 +4,7 @@
 
     // Validando que solo los administradores puedan acceder al panel
     if (!isset($_SESSION['user']) || $_SESSION['user']['id_usuario'] !== "admin") {
-        header("Location: ../index.php");
+        header("Location: ../../index.php");
         exit();
     }
 

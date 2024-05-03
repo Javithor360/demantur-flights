@@ -10,12 +10,6 @@
 <body>
     <?php include_once("./pages/components/navbar.php") ?>
 
-    <?php 
-        if (isset($_SESSION['user'])) {
-            print "<p>Hola " . print_r($_SESSION['user']) . "</p>";
-        }
-    ?>
-
     <main class="main-container">
         <section class="hero">
             <div class="hero-cont">
