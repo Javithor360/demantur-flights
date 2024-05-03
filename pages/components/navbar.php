@@ -17,7 +17,7 @@
                 <li><a href="<?php echo $dipath !== "./" ? "./index.php" : $dipath . "../index.php" ?>">Buscar vuelos</a></li>
                 <li><a href="<?php echo $dipath . "bookedFlights.php" ?>">Vuelos reservados</a></li>
                 <li><a href="<?php echo $dipath . "payments.php" ?>">Pagos</a></li>
-                <li><a href="<?php echo $dipath . "login.php" ?>">Iniciar sesión</a></li>
+                <li><a href="<?php echo isset($_SESSION['user']) ? ($dipath !== "./" ? "./index.php" : $dipath . "../index.php") : $dipath . "login.php" ?>"><?php echo isset($_SESSION['user']) ? $_SESSION['user']['nombres'] . " " . $_SESSION['user']['apellidos'] : "Iniciar sesión" ?></a></li>
             </ul>
         </div>
     </div>

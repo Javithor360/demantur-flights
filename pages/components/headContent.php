@@ -1,4 +1,7 @@
 <?php 
+    // Creando la sesión para usarla en cualquier página
+    session_start();
+
     // % Título de la página
     isset($title) ? $title : $title = "Demantur Flights";
 

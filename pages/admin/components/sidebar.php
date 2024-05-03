@@ -43,7 +43,9 @@
         <hr class="text-red-500 border-[#687180]" />
         <div class="footer mt-5">
             <div class="flex justify-between items-center text-base">
-                <p class="max-w-28 truncate text-[#D1D1D1]">Administrador</p>
+                <p class="max-w-28 truncate text-[#D1D1D1]">
+                    <?php echo $_SESSION['user']['nombres'] ?>
+                </p>
                 <a href="<?php echo $dipath . "../login.php" ?>">
                     <button type="button"
                         class="p-3 text-center font-bold text-white bg-red-500 hover:bg-red-600 rounded-lg">

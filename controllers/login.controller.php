@@ -23,7 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($email == 'alvin@gmail.com' && $pass == '12345') {
-        header('Location: ../pages/administrator.php');
+        $_SESSION['user'] = array(
+            "id_usuario" => "admin",
+            "nombres" => "Alvin M.",
+            "apellidos" => null,
+            "documento_identidad" => null,
+            "password" => null,
+            "email" => $email
+        );
+        header('Location: ../pages/admin/index.php');
         exit();
     }
 
