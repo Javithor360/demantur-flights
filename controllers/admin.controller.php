@@ -34,7 +34,7 @@ class AdminController
             $airport_name = $_POST['airport_name'];
 
             // Instancia del modelo de destino
-            $destination = new Destination(null, $name, $airport_name);
+            $destination = new Destination();
 
             // Creación de un nuevo destino
             $result = $destination->createDestination($name, $airport_name);

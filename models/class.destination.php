@@ -3,15 +3,9 @@
     require_once("class.connection.php");
 
 class Destination {
-    private $id;
-    private $name;
-    private $airport;
     private $connection;
 
-    public function __construct($id, $name, $airport) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->airport = $airport;
+    public function __construct() {
         $this->connection = new Database();
     }
     
@@ -33,18 +27,6 @@ class Destination {
         }
 
         return false;
-    }
-    
-    public function getId() {
-        return $this->id;
-    }
-
-    public function getName() {
-        return $this->name;
-    }
-
-    public function getAirport() {
-        return $this->airport;
     }
 
 }
