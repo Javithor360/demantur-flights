@@ -7,6 +7,7 @@ require_once "../src/func/load_env.php";
 
 $controller = new AuthController();
 
+// Obteniendo la acción enviada y ejecutando el método correspondiente
 if (isset($_POST['action']) || isset($_GET['action'])) {
     $action = $_POST['action'] ?? $_GET['action'];
     if (method_exists($controller, $action)) {
