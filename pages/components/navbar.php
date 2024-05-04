@@ -1,6 +1,16 @@
 <?php 
+
     // % Ruta de acceso a la carpeta de assets desde cualquier archivo
     isset($dipath) ? $dipath : $dipath = "./";
+
+    // % Verificando que exista una sesión activa
+    if (isset($_SESSION['user'])) {
+        // Si existe una sesión activa, se obtiene el nombre del usuario
+        $user = $_SESSION['user'];
+    } else {
+        //  Si no existe una sesión activa, se asigna un valor nulo a la variable
+        $user = null;
+    }
 ?>
 
 <nav class="navbar">
@@ -17,7 +27,9 @@
                 <li><a href="<?php echo $dipath !== "./" ? "./index.php" : $dipath . "../index.php" ?>">Buscar vuelos</a></li>
                 <li><a href="<?php echo $dipath . "bookedFlights.php" ?>">Vuelos reservados</a></li>
                 <li><a href="<?php echo $dipath . "payments.php" ?>">Pagos</a></li>
-                <li><a href="<?php echo isset($_SESSION['user']) ? ($dipath !== "./" ? "./index.php" : $dipath . "../index.php") : $dipath . "login.php" ?>"><?php echo isset($_SESSION['user']) ? $_SESSION['user']['nombres'] . " " . $_SESSION['user']['apellidos'] : "Iniciar sesión" ?></a></li>
+                <li><a href="<?php echo isset($user) ? ($dipath !== "./" ? "./controllers/auth.controller.php?action=logout" : "../controllers/auth.controller.php?action=logout") : $dipath . "login.php" ?>">
+                    <?php echo isset($user) ? $user['nombres'] . " " . $user['apellidos'] : "Iniciar sesión" ?>
+                </a></li>
             </ul>
         </div>
     </div>

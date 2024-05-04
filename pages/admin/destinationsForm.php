@@ -16,7 +16,7 @@
         <section class="w-full flex">
                 <div class="w-[60%] pl-6 pt-8">
                     <?php require_once("./components/pageHeader.php") ?>
-                    <form action="" class="w-[100%] 2xl:w-[90%] h-fit flex flex-col gap-[2rem]">
+                    <form action="../../controllers/admin.controller.php" class="w-[100%] 2xl:w-[90%] h-fit flex flex-col gap-[2rem]">
                         <div class="bg-[#EEEEEE] h-[3rem] w-full rounded-xl flex border-[2px] border-transparent focus-within:shadow-md focus-within:bg-white focus-within:border-[#e0e0e0] focus-within:border-[2px] hover:border-[2px] hover:border-[#e0e0e0] ease-in duration-100 overflow-hidden">
                             <div class="h-full pl-6 pr-4 flex items-center justify-center">
                                 <i class="fa-solid fa-globe text-[1.3rem] text-[#707070]" ></i>

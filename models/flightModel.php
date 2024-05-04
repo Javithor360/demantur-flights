@@ -1,5 +1,5 @@
 <?php
-require_once("../../src/db/connection.php");
+require_once("class.connection.php");
 
 class flight {
     private $id_vuelo;
@@ -34,10 +34,12 @@ class flight {
         $this->tipo_avion = $tipo_avion;
         $this->precio_boleto = $precio_boleto;
         $this->finalizado = $finalizado;
+        $this->connection = new Database(); // Cada instancia del modelo tendrá acceso a la conexión
     }
+
     //Fetch the flight info
     public function fetchFlights($type) {
-        $this->connection = Database::getInstance();
+        $pdo = $this->connection->connect(); // Se inicia la conexión con la base de datos
         $condition = $type ? "h.hora_salida >= NOW()" : "h.hora_salida < NOW()";
         $sql = "
         SELECT 
@@ -68,7 +70,12 @@ class flight {
         JOIN 
             aerolinea a ON av.id_aerolinea = a.id_aerolinea WHERE $condition";
 
-        $flightsData = $this->connection->fetchQuery($sql);
+        // Se prepara la consulta y seguidamente se ejecuta
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+
+        // Se obtienen los datos de los vuelos en un array asociativo
+        $flightsData = $statement->fetchAll(PDO::FETCH_ASSOC);
         $flights = [];
 
         foreach ($flightsData as $flightData) {
@@ -91,9 +98,10 @@ class flight {
         }
         return $flights;
     }
+
     //Fetch the passengers data
     public function fetchPassengers($id) {
-        $this->connection = Database::getInstance();
+        $pdo = $this->connection->connect();
         $sql = " 
         SELECT b.codigo_boleto AS 'codigo_boleto',
             b.fecha_compra AS 'fecha_compra',
@@ -104,7 +112,11 @@ class flight {
             INNER JOIN vuelo v ON a.id_vuelo = v.id_vuelo
             INNER JOIN usuario u ON b.id_comprador = u.id_usuario
         WHERE v.id_vuelo = $id";
-        $passengersData = $this->connection->fetchQuery($sql);
+
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+
+        $passengersData = $statement->fetchAll(PDO::FETCH_ASSOC);
         $passengers = [];
         foreach ($passengersData as $passengerData) {
             $passenger = [

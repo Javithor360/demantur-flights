@@ -46,7 +46,7 @@
                 <p class="max-w-28 truncate text-[#D1D1D1]">
                     <?php echo $_SESSION['user']['nombres'] ?>
                 </p>
-                <a href="<?php echo $dipath . "../login.php" ?>">
+                <a href="<?php echo "../../controllers/auth.controller.php?action=logout" ?>">
                     <button type="button"
                         class="p-3 text-center font-bold text-white bg-red-500 hover:bg-red-600 rounded-lg">
                         Cerrar sesión

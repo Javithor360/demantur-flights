@@ -44,7 +44,7 @@
     <div class="content_container">
       <div class="container-login <?php echo ($form_type == 'register') ? 'active' : ''?>" id="container">
           <div class="form-container sign-up">
-              <form action="../controllers/register.controller.php" method="POST">
+              <form action="../controllers/auth.controller.php" method="POST">
                   <h1 class="title-login">Crear una cuenta</h1>
                   <span class="mb-10">Utiliza tu Email para crear tu cuenta con nosotros</span>
                   <input type="text" id="names" name="names" placeholder="Nombres">
@@ -52,6 +52,7 @@
                   <input type="text" id="dui" name="dui" placeholder="DUI (12345678-9)">
                   <input type="email" id="email" name="email" placeholder="Correo">
                   <input type="password" id="password" name="password" placeholder="Contraseña">
+                  <input type="hidden" name="action" value="register" />
                   <button>Registrarse</button>
                   <?php
                     if ($error) {
@@ -64,11 +65,12 @@
               </form>
           </div>
           <div class="form-container sign-in">
-              <form method="POST" action="../controllers/login.controller.php">
+              <form method="POST" action="../controllers/auth.controller.php">
                   <h1 class="title-login">Iniciar Sesión</h1>
                   <span class="mb-10">Utiliza tus credenciales creadas previamente</span>
                   <input type="email" id="email" name="email" placeholder="Correo">
                   <input type="password" id="password" name="password" placeholder="Contraseña">
+                  <input type="hidden" name="action" value="login" />
                   <button>Iniciar Sesión</button>
                   <?php
                       if ($error) {
