@@ -3,6 +3,9 @@
 
 require_once __DIR__ . "/../models/class.destination.php";
 require_once __DIR__ . "/../models/class.schedule.php";
+require_once __DIR__ . "/../models/class.airline.php";
+require_once __DIR__ . "/../models/class.airplane.php";
+require_once __DIR__ . "/../models/class.flight.php";
 
 $controller = new AdminController();
 
@@ -114,5 +117,132 @@ class AdminController
                 $this->infoHandler('new_schedule', 'error', 'scheduleForm');
             }
         }
+    }
+
+    public function fetch_schedules() {
+        $schedule = new Schedule();
+        $schedules = $schedule->getSchedules();
+
+        return $schedules;
+    }
+
+    public function new_airline() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (empty($_POST['name'])) {
+                $this->infoHandler('empty_fields', 'error', 'airlinesForm');
+            }
+
+            // Definición de variables en base a los datos del formulario
+            $name = $_POST['name'];
+
+            // Instancia del modelo de destino
+            $airline = new Airline();
+
+            // Creación de un nuevo destino
+            $result = $airline->createAirline($name);
+
+            // Redirección a la vista de destinos
+            if($result) {
+                $this->infoHandler('new_airline', 'success', 'airlinesForm');
+            } else {
+                $this->infoHandler('new_airline', 'error', 'airlinesForm');
+            }
+        }
+    }
+
+    public function fetch_airlines() {
+        $airline = new Airline();
+        $airlines = $airline->getAirlines();
+
+        return $airlines;
+    }
+
+    public function new_airplane() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (
+                empty($_POST['aerolinea']) ||
+                empty($_POST['codigo'])
+            ) {
+                $this->infoHandler('empty_fields', 'error', 'airplanesForm');
+            }
+
+            if(strlen($_POST['codigo']) > 4) {
+                $this->infoHandler('invalid_code', 'error', 'airplanesForm');
+            }
+
+            // Definición de variables en base a los datos del formulario
+            $airline = $_POST['aerolinea'];
+            $code = $_POST['codigo'];
+
+            // Instancia del modelo de destino
+            $airplane = new Airplane();
+
+            // Creación de un nuevo destino
+            $result = $airplane->createAirplane($airline, $code);
+
+            // Redirección a la vista de destinos
+            if($result) {
+                $this->infoHandler('new_airplane', 'success', 'airplanesForm');
+            } else {
+                $this->infoHandler('new_airplane', 'error', 'airplanesForm');
+            }
+        }
+    }
+
+    public function fetch_airplanes() {
+        $airplane = new Airplane();
+        $airplanes = $airplane->getAirplanes();
+
+        return $airplanes;
+    }
+
+    public function new_flight() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (
+                empty($_POST['schedule']) ||
+                empty($_POST['airplane']) ||
+                empty($_POST['ticket-price'])
+            ) {
+                $this->infoHandler('empty_fields', 'error', 'flightsForm');
+            }
+
+            if ($_POST['ticket-price'] <= 0) {
+                $this->infoHandler('invalid_price', 'error', 'flightsForm');
+            }
+
+            // Definición de variables en base a los datos del formulario
+            $schedule_id = $_POST['schedule'];
+            $airplane_id = $_POST['airplane'];
+            $price = $_POST['ticket-price'];
+            $code = $this->generate_code();
+
+            // Instancia del modelo de destino
+            $flight = new Flight();
+
+            // Creación de un nuevo destino
+            $result = $flight->createFlight($airplane_id, $schedule_id, $price, $code);
+
+            // Redirección a la vista de destinos
+            if($result) {
+                $this->infoHandler('new_flight', 'success', 'flightsForm');
+            } else {
+                $this->infoHandler('new_flight', 'error', 'flightsForm');
+            }
+        }
+    }
+
+    function generate_code() {
+        // Caracteres válidos para las letras
+        $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        // Generar tres letras aleatorias
+        $letrasAleatorias = substr(str_shuffle($letras), 0, 3);
+    
+        // Generar cuatro números aleatorios
+        $numerosAleatorios = sprintf('%04d', mt_rand(0, 9999));
+    
+        // Concatenar letras y números para formar el código
+        $codigo = $letrasAleatorias . $numerosAleatorios;
+    
+        return $codigo;
     }
 }

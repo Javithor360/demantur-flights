@@ -1,6 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS demantur_flights DEFAULT CHARACTER SET utf8;
 
 DROP DATABASE demantur_flights;
+CREATE DATABASE demantur_flights;
 
 CREATE TABLE demantur_flights . usuario (
   id_usuario INT NOT NULL AUTO_INCREMENT,
@@ -29,7 +30,7 @@ CREATE TABLE demantur_flights . avion (
   id_avion INT NOT NULL AUTO_INCREMENT,
   codigo_avion CHAR(4) NOT NULL, -- CHAR: AV01
   id_aerolinea INT NOT NULL, -- FK_AEROLINEA
-  id_ultima_ubicacion INT NOT NULL, -- FK_DESTINO
+  id_ultima_ubicacion INT, -- FK_DESTINO
   PRIMARY KEY(id_avion),
   FOREIGN KEY(id_ultima_ubicacion) REFERENCES demantur_flights . destino(id_destino),
   FOREIGN KEY(id_aerolinea) REFERENCES demantur_flights . aerolinea(id_aerolinea)

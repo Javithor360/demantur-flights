@@ -31,4 +31,28 @@ class Schedule {
 
         return false;
     }
+
+    // Método para obtener todos los horarios
+    public function getSchedules() {
+        $pdo = $this->connection->connect();
+
+        $sql = "
+            SELECT
+                h.id_horario,
+                o.lugar AS origen,
+                d.lugar AS destino,
+                o.aeropuerto AS aeropuerto_origen,
+                d.aeropuerto AS aeropuerto_destino,
+                h.hora_salida,
+                h.hora_llegada
+            FROM horario h
+            INNER JOIN destino o ON h.id_origen = o.id_destino
+            INNER JOIN destino d ON h.id_destino = d.id_destino;
+        ";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
 }

@@ -38,6 +38,22 @@
                         <p>Crear nuevo horario</p>
                     </a>
                 </li>
+
+                <li class="mb-5">
+                    <a href="<?php echo $dipath . "airlinesForm.php" ?>"
+                        class="<?php echo $focus === "Aerolinea" ? $focus_element_class : $element_class ?>">
+                        <i class="fa-solid fa-bookmark mr-2"></i>
+                        <p>Registrar aerolíneas</p>
+                    </a>
+                </li>
+
+                <li class="mb-5">
+                    <a href="<?php echo $dipath . "airplanesForm.php" ?>"
+                        class="<?php echo $focus === "Aviones" ? $focus_element_class : $element_class ?>">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>
+                        <p>Control de aviones</p>
+                    </a>
+                </li>
                 
                 <li class="mb-5">
                     <a href="<?php echo $dipath . "flightsForm.php" ?>"
