@@ -13,32 +13,45 @@
             <div class="subdivision"></div>
             <p class="simpleText">Es de vital importancia que proporciones los datos correctos según los documentos de identidad correspondientes de cada pasajero</p>
         </div>
-        <form id="passengerForm" action="seatsSelection.php" onsubmit="return validateForm()">
-            <div class="inputCard shadow-xl">
-                <p class="inputCardTitle">Pasajero 1:</p>
-                <hr class="hrStyleOne">
-                <div class="inputsContainer">
-                    <div class="custom_input">
-                        <i class="fa-regular fa-user input_icon"></i>
-                        <input id="names" class="inputPassengers" type="text" placeholder="Nombres">
-                        <span class="error_span"></span>
+
+        <?php
+        if(isset($_GET['cantidad_personas'])) {
+            $cantidad_personas = intval($_GET['cantidad_personas']);
+            for($i = 1; $i <= $cantidad_personas; $i++) {
+                echo "
+                <form id='passengerForm_$i' action='seatsSelection.php' onsubmit='return validateForm()' class='formMargin'>
+                    <div class='inputCard shadow-xl'>
+                        <p class='inputCardTitle'>Pasajero $i:</p>
+                        <hr class='hrStyleOne'>
+                        <div class='inputsContainer'>
+                            <div class='custom_input'>
+                                <i class='fa-regular fa-user input_icon'></i>
+                                <input id='names_$i' class='inputPassengers' type='text' placeholder='Nombres'>
+                                <span class='error_span'></span>
+                            </div>
+                            <div class='custom_input'>
+                                <i class='fa-regular fa-user input_icon'></i>
+                                <input id='lastsNames_$i' class='inputPassengers' type='text' placeholder='Apellidos'>
+                                <span class='error_span'></span>
+                            </div>
+                        </div>
+                        <div class='custom_input'>
+                            <i class='fa-regular fa-id-card input_icon'></i>
+                            <input id='passengerDocument_$i' class='inputPassengers' type='text' placeholder='Documento de identidad (DNI) o Pasaporte'>
+                            <span class='error_span'></span>
+                        </div>
                     </div>
-                    <div class="custom_input">
-                        <i class="fa-regular fa-user input_icon"></i>
-                        <input id="lastsNames" class="inputPassengers" type="text" placeholder="Apellidos">
-                        <span class="error_span"></span>
-                    </div>
-                </div>
-                <div class="custom_input">
-                    <i class="fa-regular fa-id-card input_icon"></i>
-                    <input id="passengerDocument" class="inputPassengers" type="text" placeholder="Documento de identidad (DNI) o Pasaporte">
-                    <span class="error_span"></span>
-                </div>
-            </div>
-            <div class="btnContainer">
-                <button class="continueBtn">Continuar</button>
-            </div>
-        </form>
+                </form>
+                ";
+            }
+        } else {
+            echo "<p class='psgTitle marginL'>Error: No se recibió la cantidad de personas.</p>";
+        }
+        ?>
+
+        <div class="btnContainer">
+            <button class="continueBtn">Continuar</button>
+        </div>
     </main>
     <?php include_once("./components/footer.php") ?>
     <script>
@@ -51,13 +64,13 @@
                 let errorMessage;
                 let errorSpan = inputContent.nextElementSibling;
 
-                if (inputContent.id === 'names') {
+                if (inputContent.id.startsWith('names')) {
                     regex = /^[A-Za-záéíóúÁÉÍÓÚ\s]+$/;
                     errorMessage = "Ingrese un nombre válido";
-                } else if (inputContent.id === 'lastsNames') {
+                } else if (inputContent.id.startsWith('lastsNames')) {
                     regex = /^[A-Za-záéíóúÁÉÍÓÚ\s]+$/;
                     errorMessage = "Ingrese un apellido válido";
-                } else if (inputContent.id === 'passengerDocument') {
+                } else if (inputContent.id.startsWith('passengerDocument')) {
                     regex = /^[0-9a-zA-Z]+$/;
                     errorMessage = "Ingrese un documento válido";
                 }
