@@ -5,7 +5,7 @@
     $title = "Añadir aviones";
     $description = "Defina los aviones para proceder con el control de los vuelos";
     $type = "Control de aviones";
-
+    $arg = "<link rel='stylesheet' href='./assets/css/admin.css'>";
     $controller = new AdminController();
     $aerolineas = $controller->fetch_airlines();
 
@@ -43,14 +43,18 @@
                             <div class="h-full pl-6 pr-4 flex items-center justify-center">
                                 <i class="fa-solid fa-globe text-[1.3rem] text-[#707070]" ></i>
                             </div>
-                            <div class="h-full w-[80%]">
-                                <select id="aerolinea" name="aerolinea" class="bg-[#EEEEEE] border border-[2px] border-transparent text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none">
+                            <div class="h-full w-[85%]">
+                                <select id="aerolinea" name="aerolinea" class="bg-[#EEEEEE] border-[2px] border-transparent rounded-lg focus:ring-[#e0e0e0] focus:bg-[#fff] block w-full h-full ease-in duration-100 outline-none cursor-pointer text-[#707070] text-[1rem]">
                                     <option value="" disabled selected>Seleccione una aerolínea</option>
-                                    <?php foreach ($aerolineas as $aerolinea) { ?>
-                                        <option value="<?= $aerolinea['id_aerolinea'] ?>">
-                                            <?= $aerolinea['nombre'] ?>
-                                        </option>
-                                    <?php } ?>
+                                        <?php if (empty($aerolineas)) : ?>
+                                            <option value="" disabled>No hay aerolíneas disponibles</option>
+                                        <?php else : ?>
+                                            <?php foreach ($aerolineas as $aerolinea) : ?>
+                                                <option value="<?= $aerolinea['id_aerolinea'] ?>">
+                                                    <?= $aerolinea['nombre'] ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                 </select>
                             </div>
                         </div>
@@ -83,6 +87,7 @@
                                         <div class="$div">
                                         <i class="$icon"></i>
                                         <span class="text-[#31363F]">$msg</span>
+                                        </div>
                                     ALERT;
                                 } else {
                                     // Si no hay alerta definida, mostrar un div vacío para evitar errores de renderizado HTML

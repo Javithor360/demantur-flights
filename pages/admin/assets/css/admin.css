@@ -1,72 +1,16 @@
-/* Estilos para el fondo */
-body {
-    background-image: url("../img/hero_banner.png");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+::-webkit-scrollbar {
+  width: 5px;
 }
 
-/* Estilos para el formulario */
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 40px;
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
 }
 
-.form-title {
-    text-align: center;
-    margin-bottom: 30px;
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(146, 138, 138)
 }
 
-.input-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.input-group i {
-    margin-right: 10px;
-    color: var(--main);
-}
-
-.input-group input,
-.input-group select {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid var(--gray);
-    border-radius: 5px;
-}
-
-button[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: var(--main);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-    background-color: var(--black);
-}
-
-.form-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    flex-basis: 48%;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
+::-webkit-scrollbar-track {
+  margin: 2px;
 }

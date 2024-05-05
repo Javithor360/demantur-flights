@@ -5,6 +5,7 @@ $focus = "Horario";
 $title = "Añadir horarios";
 $description = "Defina los horarios del vuelo y detalles del origen y destino";
 $type = "Creación de Vuelo";
+$arg = "<link rel='stylesheet' href='./assets/css/admin.css'>";
 
 $controller = new AdminController();
 $destinations = $controller->fetch_destinations();
@@ -46,7 +47,7 @@ if (isset($_GET['info'])) {
                                 <i class="fa-solid fa-plane-departure text-[1.3rem] text-[#76ABAE] "></i>
                                 <p class="text-[#31363F] font-semibold">Lugar de salida</p>
                             </div>
-                            <select id="departure" name="lugar_salida" class="bg-[#EEEEEE] border border-[2px] border-transparent text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none">
+                            <select id="departure" name="lugar_salida" class="bg-[#EEEEEE] border-[2px] border-transparent text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none">
                                 <option disabled selected>Seleccione una opción</option>
                                 <?php foreach ($destinations as $destination) { ?>
                                     <option value="<?php echo $destination['id_destino'] ?>"><?php echo $destination['lugar'] ?></option>
@@ -58,7 +59,7 @@ if (isset($_GET['info'])) {
                                 <i class="fa-solid fa-plane-arrival text-[#76ABAE] "></i>
                                 <p class="text-[#31363F] font-semibold">Lugar de llegada</p>
                             </div>
-                            <select id="arrival" name="lugar_llegada" class="bg-[#EEEEEE] border border-[2px] border-transparent text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none">
+                            <select id="arrival" name="lugar_llegada" class="bg-[#EEEEEE] border-[2px] border-transparent text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none">
                                 <option disabled selected>Seleccione una opción</option>
                                 <?php foreach ($destinations as $destination) { ?>
                                     <option value="<?php echo $destination['id_destino'] ?>"><?php echo $destination['lugar'] ?></option>
@@ -73,14 +74,14 @@ if (isset($_GET['info'])) {
                                 <i class="fa-solid fa-calendar-day text-[#76ABAE] "></i>
                                 <p class="text-[#31363F] font-semibold">Fecha de salida</p>
                             </div>
-                            <input type="date" name="fecha_salida" class="bg-[#EEEEEE] border-transparent border border-[2px] text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" placeholder="Select date">
+                            <input type="date" name="fecha_salida" class="bg-[#EEEEEE] border-transparent border-[2px] text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" placeholder="Select date">
                         </div>
                         <div class="w-[50%]">
                             <div class="flex items-center gap-2 mb-3">
                                 <i class="fa-solid fa-calendar-day text-[#76ABAE] "></i>
                                 <p class="text-[#31363F] font-semibold">Fecha de llegada</p>
                             </div>
-                            <input type="date" name="fecha_llegada" class="bg-[#EEEEEE] border-transparent border border-[2px] text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" placeholder="Select date">
+                            <input type="date" name="fecha_llegada" class="bg-[#EEEEEE] border-transparent border-[2px] text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" placeholder="Select date">
                         </div>
                     </div>
                     <hr class="w-[80%]">
@@ -92,14 +93,14 @@ if (isset($_GET['info'])) {
                                     <p class="text-[#31363F] font-semibold">Hora de salida</p>
                                 </div>
                             </div>
-                            <input type="time" id="time" name="hora_salida" class="bg-[#EEEEEE] border-transparent border border-[2px] text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" value="00:00" required />
+                            <input type="time" id="time" name="hora_salida" class="bg-[#EEEEEE] border-transparent border-[2px] text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" value="00:00" required />
                         </div>
                         <div class="w-[50%] relative">
                             <div class="flex items-center gap-2 mb-3">
                                 <i class="fa-solid fa-clock text-[#76ABAE] "></i>
                                 <p class="text-[#31363F] font-semibold">Hora estimada de llegada</p>
                             </div>
-                            <input type="time" id="time" name="hora_llegada" class="bg-[#EEEEEE] border-transparent border border-[2px] text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" value="00:00" required />
+                            <input type="time" id="time" name="hora_llegada" class="bg-[#EEEEEE] border-transparent border-[2px] text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" value="00:00" required />
                         </div>
                     </div>
                     <hr class="w-[80%]">

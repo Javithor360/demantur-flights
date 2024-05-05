@@ -3,6 +3,7 @@
     $focus = "Inicio";
     $description = "Detalles de pasajeros, y horarios y del vuelo en general";
     $type = "Vuelo";
+    $arg = "<link rel='stylesheet' href='./assets/css/admin.css'>";
     require_once("../../controllers/flightController.php");
     if (empty($_POST['id_vuelo'])) {
         header("Location: index.php");
@@ -62,7 +63,7 @@
                         <?php
                             if(isset($flight_details['error'])) {
                                 echo "<tr colspan='10' class='odd:bg-white even:bg-gray-50 border-b w-full'>
-                                <td colspan='10' class='px-6 py-4 font-medium text-[#222831] whitespace-nowrap text-red-500 w-full text-center'>
+                                <td colspan='10' class='px-6 py-4 font-medium whitespace-nowrap text-red-500 w-full text-center'>
                                     [!] {$flight_details['error']}
                                 </td>
                               </tr>";
@@ -139,7 +140,7 @@
                         <?php
                             if(isset($flight_details['error'])) {
                                 echo "<tr colspan='10' class='odd:bg-white even:bg-gray-50 border-b w-full'>
-                                <td colspan='10' class='px-6 py-4 font-medium text-[#222831] whitespace-nowrap text-red-500 w-full text-center'>
+                                <td colspan='10' class='px-6 py-4 font-medium whitespace-nowrap text-red-500 w-full text-center'>
                                     [!] {$flight_details['error']}
                                 </td>
                               </tr>";

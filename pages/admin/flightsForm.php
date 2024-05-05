@@ -3,10 +3,9 @@ require_once "../../controllers/admin.controller.php";
 
 $focus = "Vuelo";
 $title = "Agregar vuelos";
-$description = "Texto de ejemplo";
-$type = "Creación de Vuelos";
+$description = "Seleccione los datos necesarios para completar la información de un vuelo";
+$type = "Vuelo";
 $arg = "<link rel='stylesheet' href='./assets/css/admin.css'>";
-
 $controller = new AdminController();
 $schedules = $controller->fetch_schedules();
 $airplanes = $controller->fetch_airplanes();
@@ -34,126 +33,116 @@ if (isset($_GET['info'])) {
     <main class="flex">
         <?php include_once("./components/sidebar.php") ?>
         <section class="w-full flex">
-            <div class="container mt-12">
+            <div class="w-[100%] pl-6 pt-8">
                 <?php require_once("./components/pageHeader.php") ?>
-                <form method="POST" action="../../controllers/admin.controller.php">
-                    <h1 class="form-title">Agregar Vuelo</h1>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="flight-date">Horario del vuelo</label>
-                            <div class="input-group">
-                                <i class="fas fa-calendar-alt"></i>
-                                <select id="schedule" name="schedule" class="bg-[#EEEEEE] border border-[2px] border-transparent text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none">
-                                    <option value="" disabled selected>Seleccione un horario</option>
+                <div class="w-[100%] 2xl:w-[90%]">
+                    <?php
+                        if(isset($msg) && isset($infoType)) {
+                            $div = $infoType == 'success' ? 'w-[80%] h-11 mb-8 border border-green-400 bg-green-200 rounded-xl flex items-center gap-2 px-4' : 'w-[80%] h-11 mb-8 border border-red-400 bg-red-200 rounded-xl flex items-center gap-2 px-4';
+                            $icon = $infoType == 'success' ? 'fa-solid fa-circle-check text-green-400' : 'fa-solid fa-circle-exclamation text-red-400 mt-0-5';
+
+                            echo <<<ALERT
+                                <div class="$div">
+                                <i class="$icon"></i>
+                                <span class="text-[#31363F]">$msg</span>
+                                </div>
+                            ALERT;
+                        } else {
+                            // Si no hay alerta definida, mostrar un div vacío para evitar errores de renderizado HTML
+                            echo '<div></div>';
+                        }
+                    ?>
+                </div>
+                
+                <form method="POST" action="../../controllers/admin.controller.php" class="w-[100%] 2xl:w-[90%] h-fit flex flex-col gap-[2rem] mb-12">
+                    <div class="flex gap-[1rem] w-[80%]">
+                        <div class="w-[50%]">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-earth-americas text-[1.3rem] text-[#76ABAE]"></i>
+                                <p class="text-[#31363F] font-semibold">Horario del Vuelo</p>
+                            </div>
+                            <select id="schedule" name="schedule" class="bg-[#EEEEEE] border-[2px] border-transparent text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none">
+                                <option value="" disabled selected>Seleccione un horario</option>
+                                <?php if (empty($schedules)) : ?>
+                                    <option value="" disabled>No hay horarios disponibles</option>
+                                <?php else : ?>
                                     <?php foreach ($schedules as $schedule) : ?>
                                         <option value="<?= $schedule['id_horario'] ?>">
                                             <?= $schedule['aeropuerto_origen'] ?> - <?= $schedule['aeropuerto_destino'] ?>
                                         </option>
                                     <?php endforeach; ?>
-                                </select>
-                            </div>
+                                <?php endif; ?>
+                            </select>
                         </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="departure-date">Fecha de salida</label>
-                            <div class="input-group">
-                                <i class="fas fa-plane-departure"></i>
-                                <input type="date" id="departure-date" readonly>
+                        <div class="w-[50%]">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-plane text-[1.3rem] text-[#76ABAE]"></i>
+                                <p class="text-[#31363F] font-semibold">Avión y aerolínea</p>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="departure-time">Hora de salida</label>
-                            <div class="input-group">
-                                <i class="fas fa-plane-departure"></i>
-                                <input type="time" id="departure-time" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="arrival-date">Fecha de llegada</label>
-                            <div class="input-group">
-                                <i class="fas fa-plane-arrival"></i>
-                                <input type="date" id="arrival-date" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="arrival-time">Hora de llegada estimada</label>
-                            <div class="input-group">
-                                <i class="fas fa-plane-arrival"></i>
-                                <input type="time" id="arrival-time" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="origin">Origen</label>
-                            <div class="input-group">
-                                <i class="fas fa-plane-departure"></i>
-                                <input type="text" id="origin" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="destination">Destino</label>
-                            <div class="input-group">
-                                <i class="fas fa-plane-arrival"></i>
-                                <input type="text" id="destination" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="airplane">Avión y Aerolínea</label>
-                            <div class="input-group">
-                                <i class="fas fa-plane"></i>
-                                <select id="airplane" name="airplane">
-                                    <option value="" disabled selected>Seleccione un avión</option>
+                            <select id="airplane" name="airplane" class="bg-[#EEEEEE] border-[2px] border-transparent text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none">
+                            <option value="" disabled selected>Seleccione un avión</option>
+                                <?php if (empty($airplanes)) : ?>
+                                    <option value="" disabled>No hay aviones o aerolíneas disponibles</option>
+                                <?php else : ?>
                                     <?php foreach ($airplanes as $airplane) : ?>
                                         <option value="<?= $airplane['id_avion'] ?>">
                                             <?= $airplane['codigo_avion'] ?> - <?= $airplane['aerolinea'] ?>
                                         </option>
                                     <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ticket-price">Precio del boleto</label>
-                            <div class="input-group">
-                                <i class="fas fa-dollar-sign"></i>
-                                <input type="number" id="ticket-price" name="ticket-price" step="0.01">
-                            </div>
+                                <?php endif; ?>
+                            </select>
                         </div>
                     </div>
-
-                    <div class="flex justify-start mt-4">
-                            <div class="w-[20%]">
-                                <input type="hidden" name="action" value="new_flight">
-                                <button type="submit" class="py-3 w-[90%] bg-[#76ABAE] rounded-xl flex items-center justify-center hover:opacity-85 ease-in duration-100">
-                                    <span class="font-semibold text-[#fff]">Agregar</span>
-                                </button>
+                    <hr class="w-[80%]">
+                    <div class="flex gap-[1rem] w-[80%]">
+                        <div class="w-[50%]">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-calendar-day text-[#76ABAE] "></i>
+                                <p class="text-[#31363F] font-semibold">Fecha de salida</p>
                             </div>
-                            <?php
-                                if(isset($msg) && isset($infoType)) {
-                                    $div = $infoType == 'success' ? 'w-[80%] border border-green-400 bg-green-200 rounded-xl flex items-center gap-2 px-4' : 'w-[80%] border border-red-400 bg-red-200 rounded-xl flex items-center gap-2 px-4';
-                                    $icon = $infoType == 'success' ? 'fa-solid fa-circle-check text-green-400' : 'fa-solid fa-circle-exclamation text-red-400';
-
-                                    echo <<<ALERT
-                                        <div class="$div">
-                                        <i class="$icon"></i>
-                                        <span class="text-[#31363F]">$msg</span>
-                                    ALERT;
-                                } else {
-                                    // Si no hay alerta definida, mostrar un div vacío para evitar errores de renderizado HTML
-                                    echo '<div></div>';
-                                }
-                            ?>
+                            <input placeholder="Aquí se mostrará la fecha correspondiente al horario" class="bg-[#EEEEEE] border-transparent border-[2px] text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" id="departure-date" readonly>
                         </div>
+                        <div class="w-[50%]">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-clock text-[#76ABAE] "></i>
+                                <p class="text-[#31363F] font-semibold">Hora de salida</p>
+                            </div>
+                            <input placeholder="Aquí se mostrará la hora correspondiente al horario" class="bg-[#EEEEEE] border-transparent border-[2px] text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" id="departure-time" readonly>
+                        </div>
+                    </div>
+                    <hr class="w-[80%]">
+                    <div class="flex gap-[1rem] w-[80%]">
+                        <div class="w-[50%]">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-calendar-day text-[#76ABAE] "></i>
+                                <p class="text-[#31363F] font-semibold">Fecha de llegada</p>
+                            </div>
+                            <input placeholder="Aquí se mostrará la fecha correspondiente al horario" class="bg-[#EEEEEE] border-transparent border-[2px] text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" id="arrival-date" readonly>
+                        </div>
+                        <div class="w-[50%]">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-clock text-[#76ABAE] "></i>
+                                <p class="text-[#31363F] font-semibold">Hora de llegada</p>
+                            </div>
+                            <input placeholder="Aquí se mostrará la hora correspondiente al horario" class="bg-[#EEEEEE] border-transparent border-[2px] text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" id="arrival-time" readonly>
+                        </div>
+                    </div>
+                    <hr class="w-[80%]">
+                    <div class="flex gap-[1rem] w-[80%]">
+                        <div class="w-[70%]">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-money-bill text-[#76ABAE] "></i>
+                                <p class="text-[#31363F] font-semibold">Precio del boleto</p>
+                            </div>
+                            <input placeholder="Ingrese el precio en dólares del boleto" class="bg-[#EEEEEE] border-transparent border-[2px] text-gray-900 text-sm rounded-lg focus:ring-[#e0e0e0] focus:border-[#e0e0e0] focus:bg-[#fff] block w-full p-2.5 ease-in duration-100 outline-none" type="number" id="ticket-price" name="ticket-price" step="0.01">
+                        </div>
+                        <div class="w-[30%] flex items-center justify-end">
+                            <input type="hidden" name="action" value="new_flight">
+                            <button type="submit" class="py-2.5 w-[90%] bg-[#76ABAE] rounded-xl flex items-center justify-center hover:opacity-85 ease-in duration-100 mt-8">
+                                <span class="font-semibold text-[#fff]">Agregar</span>
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </section>

@@ -3,7 +3,7 @@
     $title = "Crear aerolíneas";
     $description = "Defina las aerolíneas para proceder con el control de los aviones existentes";
     $type = "Registro de aerolíneas";
-
+    $arg = "<link rel='stylesheet' href='./assets/css/admin.css'>";
     // Información de la alerta recibida como parámetro en la petición GET
     if (isset($_GET['info'])) {
         // Verificando el tipo de alerta
