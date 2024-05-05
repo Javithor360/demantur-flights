@@ -2,7 +2,7 @@
     $focus = "Destino";
     $title = "Añadir destinos";
     $description = "Defina los destinos, tanto de salida o de llegada según disponibilidad";
-    $type = "Creación de Vuelo";
+    $type = "Creación de Destinos";
 
     // Información de la alerta recibida como parámetro en la petición GET
     if (isset($_GET['info'])) {

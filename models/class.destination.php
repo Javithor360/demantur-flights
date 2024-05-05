@@ -29,4 +29,17 @@ class Destination {
         return false;
     }
 
+    public function getDestinations() {
+        $pdo = $this->connection->connect();
+
+        $sql = "
+            SELECT * FROM destino;
+        ";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
