@@ -41,10 +41,8 @@
                             required>
                         <input type="text" placeholder="Dirección de residencia"
                             class="w-full p-4 border rounded-lg mb-4" required>
-                        <input type="text" placeholder="Ciudad" class="w-full p-4 border rounded-lg mb-4" required>
-                        <select class="w-full p-4 border rounded-lg mb-4" required>
-                            <option>País</option>
-                        </select>
+                            <input type="text" placeholder="Ciudad" class="w-full p-4 border rounded-lg mb-4" required>
+                            <input type="text" placeholder="Pais" class="w-full p-4 border rounded-lg mb-4" required>
                     </div>
 
                     <!-- Terms and Conditions -->
