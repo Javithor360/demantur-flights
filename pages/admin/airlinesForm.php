@@ -1,8 +1,8 @@
 <?php 
-    $focus = "Destino";
-    $title = "Añadir destinos";
-    $description = "Defina los destinos, tanto de salida o de llegada según disponibilidad";
-    $type = "Creación de Destinos";
+    $focus = "Aerolinea";
+    $title = "Crear aerolíneas";
+    $description = "Defina las aerolíneas para proceder con el control de los aviones existentes";
+    $type = "Registro de aerolíneas";
     $arg = "<link rel='stylesheet' href='./assets/css/admin.css'>";
     // Información de la alerta recibida como parámetro en la petición GET
     if (isset($_GET['info'])) {
@@ -14,8 +14,8 @@
         // Definición de mensajes según el tipo de alerta
         if($msg == 'empty_fields') {
             $msg = 'Por favor, rellene todos los campos';
-        } else if($msg == 'new_destination') {
-            $msg = $infoType == 'success' ? 'Destino añadido exitosamente' : 'Ha ocurrido un error al añadir el destino';
+        } else if($msg == 'new_airline') {
+            $msg = $infoType == 'success' ? 'Aerolínea registrada con éxito' : 'Ha ocurrido un error al crear la aerolínea';
         }
     }
 ?>
@@ -40,27 +40,14 @@
                                 <input
                                 type="text" 
                                 name="name" 
-                                placeholder="Ingrese un lugar" 
-                                class="h-full w-full bg-transparent outline-none placeholder:text-[#707070] text-[#707070]"
-                                />
-                            </div>
-                        </div>
-                        <div class="bg-[#EEEEEE] h-[3rem] w-full rounded-xl flex border-[2px] border-transparent focus-within:shadow-md focus-within:bg-white focus-within:border-[#e0e0e0] focus-within:border-[2px] hover:border-[2px] hover:border-[#e0e0e0] ease-in duration-100 overflow-hidden">
-                            <div class="h-full pl-6 pr-4 flex items-center justify-center">
-                                <i class="fa-solid fa-plane-up text-[1.3rem] text-[#707070]" ></i>
-                            </div>
-                            <div class="h-full w-[80%]">
-                                <input
-                                type="text" 
-                                name="airport_name" 
-                                placeholder="Ingrese el aeropuerto del lugar" 
+                                placeholder="Ingrese el nombre de la aerolínea" 
                                 class="h-full w-full bg-transparent outline-none placeholder:text-[#707070] text-[#707070]"
                                 />
                             </div>
                         </div>
                         <div class="flex justify-start mt-4">
                             <div class="w-[20%]">
-                                <input type="hidden" name="action" value="new_destination">
+                                <input type="hidden" name="action" value="new_airline">
                                 <button type="submit" class="py-3 w-[90%] bg-[#76ABAE] rounded-xl flex items-center justify-center hover:opacity-85 ease-in duration-100">
                                     <span class="font-semibold text-[#fff]">Agregar</span>
                                 </button>

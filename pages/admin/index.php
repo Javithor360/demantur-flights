@@ -4,6 +4,7 @@
     require_once("../../controllers/flightController.php");
     $commingflight = FlightController::getFlights(true);
     $pastflight = FlightController::getFlights(false);   
+    $arg = "<link rel='stylesheet' href='./assets/css/admin.css'>";
 ?>
 
 <!DOCTYPE html>
@@ -157,7 +158,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <?php if (empty(!$commingflight)) { ?>
+                    <?php if (empty(!$pastflight)) { ?>
                     <tbody>
                         <?php foreach ($pastflight as $flights): ?>
                             <tr class="odd:bg-white even:bg-gray-50 border-b">

@@ -1,2 +1,2 @@
-# Ignorar todos los archivos dentro de la carpeta src/db/
-src/db/*
+# Ignorar todos los archivos dentro de la carpeta
+models/class.connection.php

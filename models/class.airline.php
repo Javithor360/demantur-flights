@@ -2,25 +2,24 @@
 
 require_once("class.connection.php");
 
-class Destination {
+class Airline {
     private $connection;
 
     public function __construct() {
         $this->connection = new Database();
     }
-    
-    public function createDestination($name, $airport) {
+
+    public function createAirline($name) {
         $pdo = $this->connection->connect();
 
         $sql = "
-            INSERT INTO destino
-            (lugar, aeropuerto)
-            VALUES (:lugar, :aeropuerto);
+            INSERT INTO aerolinea
+            (nombre)
+            VALUES (:nombre);
         ";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(":lugar", $name);
-        $stmt->bindParam(":aeropuerto", $airport);
+        $stmt->bindParam(":nombre", $name);
 
         if ($stmt->execute()) {
             return true;
@@ -29,11 +28,11 @@ class Destination {
         return false;
     }
 
-    public function getDestinations() {
+    public function getAirlines() {
         $pdo = $this->connection->connect();
 
         $sql = "
-            SELECT * FROM destino;
+            SELECT * FROM aerolinea;
         ";
 
         $stmt = $pdo->prepare($sql);
@@ -41,5 +40,4 @@ class Destination {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }
