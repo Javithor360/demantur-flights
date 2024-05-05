@@ -67,13 +67,14 @@
                             </div>
                             <?php
                                 if(isset($msg) && isset($infoType)) {
-                                    $div = $infoType == 'success' ? 'w-[80%] border border-green-400 bg-green-200 rounded-xl flex items-center gap-2 px-4' : 'w-[80%] border border-red-400 bg-red-200 rounded-xl flex items-center gap-2 px-4';
+                                    $div = $infoType == 'success' ? 'w-[70%] border border-green-400 bg-green-200 rounded-xl flex items-center gap-2 px-4' : 'w-[80%] border border-red-400 bg-red-200 rounded-xl flex items-center gap-2 px-4';
                                     $icon = $infoType == 'success' ? 'fa-solid fa-circle-check text-green-400' : 'fa-solid fa-circle-exclamation text-red-400';
 
                                     echo <<<ALERT
                                         <div class="$div">
                                         <i class="$icon"></i>
                                         <span class="text-[#31363F]">$msg</span>
+                                        </div>
                                     ALERT;
                                 } else {
                                     // Si no hay alerta definida, mostrar un div vacío para evitar errores de renderizado HTML
