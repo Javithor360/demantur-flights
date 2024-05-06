@@ -1,90 +1,82 @@
 <html lang="es">
-<?php 
-    $title = "Pasajeros";
-    $arg = "<link rel='stylesheet' href='./assets/css/passengerForm.css'>";
-    include_once("./components/headContent.php"); 
+<?php // Iniciar la sesión al principio del archivo
+$title = "Pasajeros";
+$arg = "<link rel='stylesheet' href='./assets/css/passengerForm.css'>";
+include_once("./components/headContent.php");
 ?>
 <body>
-    <?php include_once("./components/navbar.php") ?>
+    <?php include_once("./components/navbar.php"); ?>
     <main class="mainContainer min-h-[85vh]">
         <p class="psgTitle marginL">Ingresa la información de los pasajeros</p>
-        <div class="splitMsgContainer marginL">
-            <i class="fa-solid fa-pen-clip lightIcon"></i>
-            <div class="subdivision"></div>
-            <p class="simpleText">Es de vital importancia que proporciones los datos correctos según los documentos de identidad correspondientes de cada pasajero</p>
-        </div>
-
         <?php
-        if(isset($_GET['cantidad_personas'])) {
+        if (isset($_GET['cantidad_personas'], $_GET['origen'], $_GET['destino'])) {
             $cantidad_personas = intval($_GET['cantidad_personas']);
-            for($i = 1; $i <= $cantidad_personas; $i++) {
+            $origen = $_GET['origen'];
+            $destino = $_GET['destino'];
+            echo "<form action='seatsSelection.php' method='post' onsubmit='return validateForm()'>";
+            echo "<input type='hidden' name='cantidad_personas' value='{$cantidad_personas}'>";
+            echo "<input type='hidden' name='origen' value='{$origen}'>";
+            echo "<input type='hidden' name='destino' value='{$destino}'>";
+            for ($i = 1; $i <= $cantidad_personas; $i++) {
                 echo "
-                <form id='passengerForm_$i' action='seatsSelection.php' onsubmit='return validateForm()' class='formMargin'>
-                    <div class='inputCard shadow-xl'>
-                        <p class='inputCardTitle'>Pasajero $i:</p>
-                        <hr class='hrStyleOne'>
-                        <div class='inputsContainer'>
-                            <div class='custom_input'>
-                                <i class='fa-regular fa-user input_icon'></i>
-                                <input id='names_$i' class='inputPassengers' type='text' placeholder='Nombres'>
-                                <span class='error_span'></span>
-                            </div>
-                            <div class='custom_input'>
-                                <i class='fa-regular fa-user input_icon'></i>
-                                <input id='lastsNames_$i' class='inputPassengers' type='text' placeholder='Apellidos'>
-                                <span class='error_span'></span>
-                            </div>
+                <div class='inputCard shadow-xl'>
+                    <p class='inputCardTitle'>Pasajero $i:</p>
+                    <hr class='hrStyleOne'>
+                    <div class='inputsContainer'>
+                        <div class='custom_input'>
+                            <i class='fa-regular fa-user input_icon'></i>
+                            <input name='names_$i' class='inputPassengers' type='text' placeholder='Nombres'>
+                            <span class='error_span'></span>
+                        </div>
+                        <div class='custom_input'>
+                            <i class='fa-regular fa-user input_icon'></i>
+                            <input name='lastNames_$i' class='inputPassengers' type='text' placeholder='Apellidos'>
+                            <span class='error_span'></span>
                         </div>
                         <div class='custom_input'>
                             <i class='fa-regular fa-id-card input_icon'></i>
-                            <input id='passengerDocument_$i' class='inputPassengers' type='text' placeholder='Documento de identidad (DNI) o Pasaporte'>
+                            <input name='document_$i' class='inputPassengers' type='text' placeholder='Documento de identidad (DNI) o Pasaporte'>
                             <span class='error_span'></span>
                         </div>
                     </div>
-                </form>
+                </div>
                 ";
             }
+            echo "<button type='submit' class='continueBtn'>Continuar</button>";
+            echo "</form>";
         } else {
-            echo "<p class='psgTitle marginL'>Error: No se recibió la cantidad de personas.</p>";
+            echo "<p>Error: No se recibió la cantidad de personas o los datos de vuelo.</p>";
         }
         ?>
-
-        <div class="btnContainer">
-            <button class="continueBtn">Continuar</button>
-        </div>
     </main>
-    <?php include_once("./components/footer.php") ?>
+    <?php include_once("./components/footer.php"); ?>
     <script>
         function validateForm() {
             var isValid = true;
             var inputs = document.querySelectorAll('.inputPassengers');
-
-            inputs.forEach(function(inputContent) {
+            inputs.forEach(function(input) {
                 let regex;
                 let errorMessage;
-                let errorSpan = inputContent.nextElementSibling;
-
-                if (inputContent.id.startsWith('names')) {
+                let errorSpan = input.nextElementSibling;
+                if (input.name.startsWith('names')) {
                     regex = /^[A-Za-záéíóúÁÉÍÓÚ\s]+$/;
                     errorMessage = "Ingrese un nombre válido";
-                } else if (inputContent.id.startsWith('lastsNames')) {
+                } else if (input.name.startsWith('lastNames')) {
                     regex = /^[A-Za-záéíóúÁÉÍÓÚ\s]+$/;
                     errorMessage = "Ingrese un apellido válido";
-                } else if (inputContent.id.startsWith('passengerDocument')) {
+                } else if (input.name.startsWith('document')) {
                     regex = /^[0-9a-zA-Z]+$/;
                     errorMessage = "Ingrese un documento válido";
                 }
-
-                if (!regex.test(inputContent.value)) {
-                    inputContent.classList.add("invalid");
+                if (!regex.test(input.value)) {
+                    input.classList.add("invalid");
                     errorSpan.innerText = errorMessage;
                     isValid = false;
                 } else {
-                    inputContent.classList.remove("invalid");
+                    input.classList.remove("invalid");
                     errorSpan.innerText = "";
                 }
             });
-
             return isValid;
         }
     </script>

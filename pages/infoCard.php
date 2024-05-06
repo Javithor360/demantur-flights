@@ -10,7 +10,7 @@
     <div class="min-h-screen flex items-center justify-center">
         <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
             <div class="mb-4">
-                <img src="../src/img/logo_full.png" alt="Company logo with a red icon resembling a bird in flight, placed to the left of the company name 'Avianca' in red text." class="mb-6">
+                <img src="https://live.staticflickr.com/65535/53701536846_61daf52fa4_m.jpg" alt="Company logo with a red icon resembling a bird in flight, placed to the left of the company name 'Avianca' in red text." class="mb-6">
                 <h1 class="text-2xl font-bold mb-2">Ingresa tu tarjeta</h1>
                 <p class="text-gray-600 mb-6">Paga seguro con estos medios de pago</p>
                 <div class="flex space-x-2 mb-6">
