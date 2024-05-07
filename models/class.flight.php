@@ -83,6 +83,7 @@ class Flight
             $flight->setTipoAvion($flightData['tipo_avion']);
             $flight->setPrecioBoleto($flightData['precio_boleto']);
             $flight->setFinalizado($flightData['finalizado']);
+            $this->setConnection(null);
             $flights[] = $flight;
         }
         return $flights;
@@ -164,6 +165,7 @@ class Flight
                 $flight->setAerolinea($flightData['aerolinea_nombre']);
                 $flight->setPrecioBoleto($flightData['tarifa']);
                 $flight->setFinalizado($flightData['finalizado']);
+                $this->setConnection(null);
                 $flights[] = $flight;
             }
         }
@@ -171,6 +173,41 @@ class Flight
         return $flights;
     }
 
+    // Fetch flight by id
+    public function fetchFlightById($id) {
+        $pdo = $this->connection->connect();
+        $flight = null;
+
+        $sql = "SELECT v.*, h.hora_salida, h.hora_llegada, a.nombre AS aerolinea_nombre, origen.lugar AS origen_lugar, destino.lugar AS destino_lugar
+            FROM vuelo v
+            INNER JOIN horario h ON v.id_horario = h.id_horario
+            INNER JOIN destino origen ON h.id_origen = origen.id_destino
+            INNER JOIN destino destino ON h.id_destino = destino.id_destino
+            INNER JOIN avion av ON v.id_avion = av.id_avion
+            INNER JOIN aerolinea a ON av.id_aerolinea = a.id_aerolinea
+            WHERE v.id_vuelo = :id";
+
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(":id", $id);
+
+        if ($statement->execute()) {
+            $flightData = $statement->fetch(PDO::FETCH_ASSOC);
+            $flight = array(
+                'id_vuelo' => $flightData['id_vuelo'],
+                'codigo' => $flightData['codigo'],
+                'fecha_salida' => $flightData['hora_salida'],
+                'hora_salida' => $flightData['hora_salida'],
+                'fecha_llegada' => $flightData['hora_llegada'],
+                'hora_llegada' => $flightData['hora_llegada'],
+                'origen_lugar' => $flightData['origen_lugar'],
+                'destino_lugar' => $flightData['destino_lugar'],
+                'aerolinea_nombre' => $flightData['aerolinea_nombre'],
+                'tarifa' => $flightData['tarifa'],
+                'finalizado' => $flightData['finalizado']
+            );
+        }
+        return $flight;
+    }
 
     //Create a new flight
     public function createFlight($id_airplane, $id_schedule, $price, $code)
@@ -265,6 +302,11 @@ class Flight
         $this->finalizado = $finalizado;
     }
 
+    public function setConnection($connection)
+    {
+        $this->connection = $connection;
+    }
+
     // Getters
     public function getIdVuelo()
     {
@@ -332,5 +374,10 @@ class Flight
     public function getFinalizado()
     {
         return $this->finalizado;
+    }
+
+    public function getConnection()
+    {
+        return $this->connection;
     }
 }

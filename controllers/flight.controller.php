@@ -96,4 +96,66 @@ class FlightController{
 
         return $flights;
     }
+
+    public function flight_reservation() {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            if (empty($_GET['id_vuelo'])) {
+                header("Location: ./flights.php");
+                exit();
+            }
+
+            $id_vuelo = $_GET['id_vuelo'];
+            $flight = new Flight();
+
+            $_SESSION['selected_flight'] = $flight->fetchFlightById($id_vuelo);
+
+            // print_r($_SESSION['flight']);
+            header("Location: ../pages/passengerForm.php");
+        }
+    }
+
+    public function selected_passengers_info() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (empty($_POST['pasajeros']) || !is_numeric($_POST['pasajeros'])) { 
+                header("Location: ./flights.php");
+                exit();
+            }
+
+            $passangersData = [];
+
+            for ($i = 1; $i <= $_POST['pasajeros']; $i++) {
+                if (empty($_POST["names_$i"]) || empty($_POST["lastNames_$i"]) || empty($_POST["document_$i"])) {
+                    header("Location: ../pages/flights.php");
+                    exit();
+                }
+
+                $passangersData[] = array(
+                    'names' => $_POST["names_$i"],
+                    'lastNames' => $_POST["lastNames_$i"],
+                    'document' => $_POST["document_$i"],
+                    'seat' => null
+                );
+            }
+
+            $_SESSION['selected_passengers'] = $passangersData;
+
+            header("Location: ../pages/seatsSelection.php");
+        }
+    }
+
+    public function update_seat_selection() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            foreach ($_SESSION['selected_passengers'] as $index => $passengerData) {
+                if (empty($_POST["selected_seat_$index"])) {
+                    header("Location: ../pages/seatsSelection.php?info=empty_fields");
+                    exit();
+                }
+
+                $_SESSION['selected_passengers'][$index]['seat'] = $_POST["selected_seat_$index"];
+            }
+
+            // print_r($_SESSION['selected_passengers']);
+            header("Location: ../pages/payments.php");
+        }
+    }
 }

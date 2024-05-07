@@ -7,6 +7,8 @@
     } else {
         $flights = FlightController::getFlights(true);
     }
+
+    // print_r($flights)
 ?>
 
 <html lang="en">
@@ -148,7 +150,7 @@
                                 </div>
 
                                 <div>
-                                <a href="<?php echo isset($_SESSION['user']) ? "./passengerForm.php" : "./login.php" ?>" class='items-center px-4 py-2 ml-10 text-white transition duration-500 ease-in-out bg-green-500 rounded hover:bg-green-700 hover:text-white'><?php echo isset($_SESSION['user']) ? "Comprar" : "Iniciar sesión" ?></a>
+                                <a href="<?php echo isset($_SESSION['user']) ? "../controllers/flight.controller.php?action=flight_reservation&id_vuelo=" . $flight->getIdVuelo() : "./login.php" ?>" class='items-center px-4 py-2 ml-10 text-white transition duration-500 ease-in-out bg-green-500 rounded hover:bg-green-700 hover:text-white'><?php echo isset($_SESSION['user']) ? "Comprar" : "Iniciar sesión" ?></a>
                                 </div>
                             </div>
                         <?php } ?>
