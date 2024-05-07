@@ -14,11 +14,11 @@
         <?php
         if (isset($_POST['cantidad_personas'])) {
             $cantidad_personas = $_POST['cantidad_personas'];
-            echo "<div class='text-lg mb-5'>Cantidad de personas seleccionadas: $cantidad_personas</div>";
+//            echo "<div class='text-lg mb-5'>Cantidad de personas seleccionadas: $cantidad_personas</div>";
         }
 
         if (isset($_POST['lugar']) && isset($_POST['fecha_salida'])) {
-            $conexion = new mysqli('localhost', 'root', '', 'demantur_flights', 3306);
+            $conexion = new mysqli('localhost', 'root', '12345', 'demantur_flights', 3306);
             if ($conexion->connect_error) {
                 die("Error de conexión: " . $conexion->connect_error);
             }
@@ -32,7 +32,7 @@
                     INNER JOIN destino destino ON h.id_destino = destino.id_destino
                     INNER JOIN avion av ON v.id_avion = av.id_avion
                     INNER JOIN aerolinea a ON av.id_aerolinea = a.id_aerolinea
-                    WHERE destino.lugar = '$lugar' AND DATE(h.hora_salida) = '$fecha_salida'";
+                    WHERE LOWER(destino.lugar) LIKE LOWER('%$lugar%') AND DATE(h.hora_salida) = '$fecha_salida'";
             $resultado = $conexion->query($sql);
 
             if ($resultado->num_rows > 0) {

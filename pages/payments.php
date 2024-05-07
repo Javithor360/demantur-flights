@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DSS FINAL/demantur-flights/models/class.connection.php';
+require_once '../models/class.connection.php';
 
 $db = new Database();
 $conn = $db->connect();
