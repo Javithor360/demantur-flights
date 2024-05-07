@@ -16,7 +16,7 @@ if(empty($_SESSION['selected_flight'])) {
     $msg = "No se ha seleccionado un vuelo."; // Mensaje de error al no haber seleccionado un vuelo
 }
 
-$occupiedSeats = FlightController::getOccupiedSeats($_SESSION['selected_flight']['id_vuelo']); // Obtener los asientos ocupados
+    $occupiedSeats = isset($_SESSION['selected_flight']) ? FlightController::getOccupiedSeats($_SESSION['selected_flight']['id_vuelo']) : []; // Obtener los asientos ocupados
 // print_r($occupiedSeats);
 ?>
 
@@ -85,8 +85,10 @@ $occupiedSeats = FlightController::getOccupiedSeats($_SESSION['selected_flight']
     </div>
     <footer><?php include_once("./components/footer.php"); ?></footer>
     <script>
-        const occupiedSeats = <?php echo json_encode(array_column($occupiedSeats, 'numero_asiento')); ?>; // Asientos ocupados
+        const occupiedSeats = <?php echo json_encode(array_column($occupiedSeats, 'numero_asiento')) ?>; // Asientos ocupados
 
+        console.log(occupiedSeats)
+        
         const seatMap = document.getElementById('seatMap');
         const rows = 10; // Number of rows
         const cols = ['A', 'B', 'C', 'D', 'F', 'G']; // Columns
