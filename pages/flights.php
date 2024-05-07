@@ -86,11 +86,11 @@
                                         <i style='color:#76ABAE;' class='mr-2 fa-solid fa-dollar-sign'></i>
                                         <p name='llegada' class='text-2xl text-gray-700 dark:text-gray-300'>Tarifa</p>
                                     </div>
-                                    <p name='tarifa' class='text-2xl text-gray-700 dark:text-gray-300'>440.99 USD</p>
+                                    <p name='tarifa' class='text-2xl text-gray-700 dark:text-gray-300'><?= $flight->getPrecioBoleto() ?></p>
                                 </div>
 
                                 <div>
-                                    <a href='' class='items-center px-4 py-2 ml-10 text-white transition duration-500 ease-in-out bg-green-500 rounded hover:bg-green-700 hover:text-white'>Comprar</a>
+                                    <a href="<?php echo isset($_SESSION['user']) ? "./passengerForm.php" : "./login.php" ?>" class='items-center px-4 py-2 ml-10 text-white transition duration-500 ease-in-out bg-green-500 rounded hover:bg-green-700 hover:text-white'><?php echo isset($_SESSION['user']) ? "Comprar" : "Iniciar sesión" ?></a>
                                 </div>
                             </div>
                         <?php } ?>
@@ -144,11 +144,11 @@
                                         <i style='color:#76ABAE;' class='mr-2 fa-solid fa-dollar-sign'></i>
                                         <p name='llegada' class='text-2xl text-gray-700 dark:text-gray-300'>Tarifa</p>
                                     </div>
-                                    <p name='tarifa' class='text-2xl text-gray-700 dark:text-gray-300'>440.99 USD</p>
+                                    <p name='tarifa' class='text-2xl text-gray-700 dark:text-gray-300'><?= $flight->getPrecioBoleto() ?></p>
                                 </div>
 
                                 <div>
-                                    <a href='' class='items-center px-4 py-2 ml-10 text-white transition duration-500 ease-in-out bg-green-500 rounded hover:bg-green-700 hover:text-white'>Comprar</a>
+                                <a href="<?php echo isset($_SESSION['user']) ? "./passengerForm.php" : "./login.php" ?>" class='items-center px-4 py-2 ml-10 text-white transition duration-500 ease-in-out bg-green-500 rounded hover:bg-green-700 hover:text-white'><?php echo isset($_SESSION['user']) ? "Comprar" : "Iniciar sesión" ?></a>
                                 </div>
                             </div>
                         <?php } ?>
