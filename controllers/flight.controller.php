@@ -187,5 +187,10 @@ class FlightController{
             exit();
         }
     }
+
+    public static function getOccupiedSeats($flight_id) {
+        $flight = new Flight();
+        return $flight->fetchOccupiedSeats($flight_id);
+    }
     
 }

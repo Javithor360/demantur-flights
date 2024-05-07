@@ -4,7 +4,7 @@
     $arg = "<link rel='stylesheet' href='./assets/css/purchaseSummary.css'>";
     include_once("./components/headContent.php"); 
 
-    if(empty($_SESSION['reservation'])) {
+    if(empty($_SESSION['reservation'])) { // Si no hay una reserva en la sesión, redirigir al index
         header("Location: ../index.php");
     }
 
@@ -112,7 +112,7 @@
         </section>
 
         <section class="summary-return">
-            <a href="./index.php"><button class="return-button">Entendido</button></a>
+            <a href="../index.php"><button class="return-button">Entendido</button></a>
         </section>
     </main>
 

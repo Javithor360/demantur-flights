@@ -1,6 +1,8 @@
 <?php 
     $title = "Inicio";
-    $dipath = "./pages/"
+    $dipath = "./pages/";
+
+    unset($_SESSION['reservation']); // Limpiando la variable de sesión de la reservación
 ?>
 
 <html lang="en">

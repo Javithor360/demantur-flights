@@ -240,19 +240,19 @@ class Flight
         $pdo = $this->connection->connect();
         $pdo->beginTransaction();
 
-        $tickets = [];
+        $tickets = []; // Array para guardar la información de los boletos
 
         try {
-            foreach ($passengers as $passenger) {
+            foreach ($passengers as $passenger) { // Recorrer los pasajeros obtenidos para crear su reservacion
                 $seatSQL = "INSERT INTO asiento (numero_asiento, id_vuelo) VALUES (:numero_asiento, :id_vuelo);";
                 $stmt = $pdo->prepare($seatSQL);
                 $stmt->bindParam(":numero_asiento", $passenger['seat']);
                 $stmt->bindParam(":id_vuelo", $flightData['id_vuelo']);
 
                 if ($stmt->execute()) {
-                    $passenger['id_asiento'] = $pdo->lastInsertId();
-                    $passenger_name = $passenger['names'] . ' ' . $passenger['lastNames'];
-                    $ticket_code = $this->generateRandomCode();
+                    $passenger['id_asiento'] = $pdo->lastInsertId(); // Obtener el id del asiento creado
+                    $passenger_name = $passenger['names'] . ' ' . $passenger['lastNames']; // Concatenar nombres y apellidos
+                    $ticket_code = $this->generateRandomCode(); // Generar código de boleto
 
                     $sql = "INSERT INTO boleto (id_comprador, fecha_compra, codigo_boleto, id_asiento, nombre_pasajero, documento_identidad)
                         VALUES (:id_comprador, NOW(), :codigo_boleto, :id_asiento, :nombre_pasajero, :documento_identidad);";
@@ -293,8 +293,7 @@ class Flight
         );
     }
 
-
-
+    // Fetch the ticket information by its id
     public function getTicketInfoById($ticketId)
     {
         $pdo = $this->connection->connect();
@@ -312,7 +311,25 @@ class Flight
         return $ticketInfo;
     }
 
+    // Fetch the occupied seats of a flight
+    public function fetchOccupiedSeats($flight_id) {
+        $pdo = $this->connection->connect();
 
+        $sql = "SELECT a.numero_asiento
+                FROM asiento a
+                INNER JOIN boleto b ON a.id_asiento = b.id_asiento
+                WHERE a.id_vuelo = :id_vuelo";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":id_vuelo", $flight_id);
+        $stmt->execute();
+
+        $occupiedSeats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $occupiedSeats;
+    }
+
+
+    // Generate a random code for the ticket
     function generateRandomCode()
     {
         // Generar cuatro letras aleatorias mayúsculas

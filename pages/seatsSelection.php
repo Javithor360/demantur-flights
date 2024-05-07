@@ -3,17 +3,21 @@
 $title = "Asientos";
 $arg = "<link rel='stylesheet' href='./assets/css/SeatSelection.css'>";
 include_once("./components/headContent.php");
+include_once("../controllers/flight.controller.php");
 
 // print_r($_SESSION['selected_passengers']);
-if(isset($_GET['info'])) {
+if(isset($_GET['info'])) { // Mensaje de error al no haber seleccionado un asiento
     if ($_GET['info'] === 'empty_fields') {
         $msg = "Por favor, selecciona un asiento para cada pasajero.";
     }
 }
 
 if(empty($_SESSION['selected_flight'])) {
-    $msg = "No se ha seleccionado un vuelo.";
+    $msg = "No se ha seleccionado un vuelo."; // Mensaje de error al no haber seleccionado un vuelo
 }
+
+$occupiedSeats = FlightController::getOccupiedSeats($_SESSION['selected_flight']['id_vuelo']); // Obtener los asientos ocupados
+// print_r($occupiedSeats);
 ?>
 
 <body>
@@ -40,6 +44,7 @@ if(empty($_SESSION['selected_flight'])) {
                             <input type='hidden' name='action' value='update_seat_selection' />
                             <div>
                                 <?php
+                                // Mostrar los pasajeros seleccionados
                                 if(isset($_SESSION['selected_passengers'])) {
                                     foreach ($_SESSION['selected_passengers'] as $index => $passengerData) {
                                         $passenger = $passengerData['names'] . " " . $passengerData['lastNames'];
@@ -80,6 +85,8 @@ if(empty($_SESSION['selected_flight'])) {
     </div>
     <footer><?php include_once("./components/footer.php"); ?></footer>
     <script>
+        const occupiedSeats = <?php echo json_encode(array_column($occupiedSeats, 'numero_asiento')); ?>; // Asientos ocupados
+
         const seatMap = document.getElementById('seatMap');
         const rows = 10; // Number of rows
         const cols = ['A', 'B', 'C', 'D', 'F', 'G']; // Columns
@@ -91,10 +98,23 @@ if(empty($_SESSION['selected_flight'])) {
             for (let j = 0; j < cols.length; j++) {
                 const seat = document.createElement('div');
                 seat.classList.add('seat');
-                seat.dataset.seatNumber = i + cols[j];
-                seat.textContent = i + cols[j];
+                const seatNumber = i + cols[j];
+                seat.dataset.seatNumber = seatNumber;
+                seat.textContent = seatNumber;
+
+                // Verificar si el asiento está ocupado
+                if (occupiedSeats.includes(seatNumber)) {
+                    // Asiento ocupado, aplicando clases visuales
+                    seat.classList.add('occupied');
+                    seat.classList.add('bg-red-200');
+                    seat.classList.add('cursor-default');
+                    seat.classList.add('text-gray-500');
+                    seat.removeEventListener('click', selectSeat); // Eliminar el evento de selección
+                } else {
+                    seat.addEventListener('click', selectSeat);
+                }
+                
                 row.appendChild(seat);
-                seat.addEventListener('click', selectSeat);
             }
             seatMap.appendChild(row);
         }
