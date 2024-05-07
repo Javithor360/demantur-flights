@@ -89,6 +89,71 @@ class Flight
         return $flights;
     }
 
+    //Fetch users flights
+    public function fetchUserFlights($id)
+    {
+        $pdo = $this->connection->connect(); // Se inicia la conexión con la base de datos
+        $sql = "
+        SELECT 
+            v.id_vuelo,
+            v.codigo AS codigo_vuelo,
+            DATE(h.hora_salida) AS fecha_salida,
+            TIME(h.hora_salida) AS hora_salida,
+            DATE(h.hora_llegada) AS fecha_llegada,
+            TIME(h.hora_llegada) AS hora_llegada,
+            orig.lugar AS origen,
+            orig.aeropuerto AS aeropuerto_origen,
+            dest.lugar AS destino,
+            dest.aeropuerto AS aeropuerto_destino,
+            a.nombre AS aerolinea,
+            av.codigo_avion AS tipo_avion,
+            v.tarifa AS precio_boleto,
+            v.finalizado
+        FROM 
+            vuelo v
+        JOIN 
+            horario h ON v.id_horario = h.id_horario
+        JOIN 
+            destino orig ON h.id_origen = orig.id_destino
+        JOIN 
+            destino dest ON h.id_destino = dest.id_destino
+        JOIN 
+            avion av ON v.id_avion = av.id_avion
+        JOIN 
+            aerolinea a ON av.id_aerolinea = a.id_aerolinea
+        JOIN
+            usuario us ON us.id_usuario = $id";
+
+        // Se prepara la consulta y seguidamente se ejecuta
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+
+        // Se obtienen los datos de los vuelos en un array asociativo
+        $flightsData = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $flights = [];
+
+        foreach ($flightsData as $flightData) {
+            $flight = new Flight();
+            $flight->setIdVuelo($flightData['id_vuelo']);
+            $flight->setCodigoVuelo($flightData['codigo_vuelo']);
+            $flight->setFechaSalida($flightData['fecha_salida']);
+            $flight->setHoraSalida($flightData['hora_salida']);
+            $flight->setFechaLlegada($flightData['fecha_llegada']);
+            $flight->setHoraLlegada($flightData['hora_llegada']);
+            $flight->setOrigen($flightData['origen']);
+            $flight->setDestino($flightData['destino']);
+            $flight->setAerolinea($flightData['aerolinea']);
+            $flight->setAeropuertoOrigen($flightData['aeropuerto_origen']);
+            $flight->setAeropuertoDestino($flightData['aeropuerto_destino']);
+            $flight->setTipoAvion($flightData['tipo_avion']);
+            $flight->setPrecioBoleto($flightData['precio_boleto']);
+            $flight->setFinalizado($flightData['finalizado']);
+            $this->setConnection(null);
+            $flights[] = $flight;
+        }
+        return $flights;
+    }
+
     //Fetch the passengers data
     public function fetchPassengers($id)
     {

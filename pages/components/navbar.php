@@ -25,7 +25,7 @@
                 <!-- Validación de la navegación del index para accederlo desde cualquier carpeta -->
                 <li><a href="<?php echo $dipath !== "./" ? "./index.php" : $dipath . "../index.php" ?>">Inicio</a></li>
                 <li><a href="<?php echo $dipath . "flights.php" ?>">Buscar vuelos</a></li>
-                <!-- <li><a href="<?php echo $dipath . "bookedFlights.php" ?>">Vuelos reservados</a></li> -->
+                <li><a href="<?php echo $dipath . "bookedFlights.php" ?>">Vuelos reservados</a></li>
                 <li><a href="<?php echo isset($user) ? ($dipath !== "./" ? "./controllers/auth.controller.php?action=logout" : "../controllers/auth.controller.php?action=logout") : $dipath . "login.php" ?>">
                     <?php echo isset($user) ? $user['nombres'] . " " . $user['apellidos'] : "Iniciar sesión" ?>
                 </a></li>

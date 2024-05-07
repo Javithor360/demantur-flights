@@ -2,7 +2,17 @@
 <?php 
     $title = "Asientos";
     $arg = "<link rel='stylesheet' href='./assets/css/bookedFlights.css'>";
-    include_once("./components/headContent.php"); 
+    include_once("./components/headContent.php");
+    include_once("../controllers/flight.controller.php");
+    $flights = null;
+    
+    if (!isset($_SESSION['user'])) {
+        header('Location: ../index.php');
+    }
+
+    if (isset($_SESSION['user'])) {
+        $flights = FlightController::getUserFlights($_SESSION['user']['id_usuario']);
+    }
 ?>
 <body>
     <?php include_once("./components/navbar.php") ?>
@@ -15,62 +25,41 @@
     <div class="ticketsContainer shadow-xl">
         <p class="ml-[15rem] text-[#31363F] font-bold text-[3rem]">Próximos</p> 
         <hr class="style-one">
-        <div class="flightCard shadow-xl">
+        <?php foreach ($flights as $flight) { ?>
+        <?php
+            $fecha_actual = new DateTime();
+            // Convertir la fecha proporcionada a un objeto DateTime
+            $fecha_llegada = new DateTime($flight->getFechaLlegada());
+        ?>
+        <div class="flightCard shadow-xl">  
             <div class="headerC">
-                <p class="countryTitle"><i class="fa-solid fa-earth-americas mr-[1rem]"></i> El Salvador - Madrid</p>
-                <p class="countryTitle"><i class="fa-solid fa-calendar mr-[1rem]"></i> 30 marzo de 2024</p>
+                <p class="countryTitle"><i class="fa-solid fa-earth-americas mr-[1rem]"></i> <?= $flight->getOrigen() ?> - <?= $flight->getDestino() ?></p>
+                <p class="countryTitle"><i class="fa-solid fa-calendar mr-[1rem]"></i> <?= strftime('%e de %B de %Y', strtotime($flight->getFechaSalida())) ?> </p>
             </div>
             <hr>
             <div class="contentI">
                 <i class="fa-solid fa-plane-departure plane-icon-p"></i>
                 <div>
-                    <p class="hourT">15:30</p>
-                    <p>SAL</p>
+                    <p class="hourT"> <?= date("g:i a", strtotime($flight->getHoraSalida()))?> </p>
+                    <p><?= strtoupper(substr($flight->getOrigen(), 0, 3)) ?> </p>
                 </div>
                 <div class="separator"></div>
                 <div>
-                    <p class="hourT">22:30</p>
-                    <p>MAD</p>
+                    <p class="hourT"><?= date("g:i a", strtotime($flight->getHoraLlegada()))?></p>
+                    <p><?= strtoupper(substr($flight->getDestino(), 0, 3)) ?></p>
                 </div>
                 <div class="aditionalinfoC">
-                    <p class="grayText">2 pasajeros</p>
-                    <p class="greenText">Sin escalas</p>
-                    <p class="grayText">Codigo: VL20240321V01</p>
+                    <p class="grayText">Codigo: <?= $flight->getCodigoVuelo() ?></p>
                 </div>
                 <div class="aditionalinfoCC">
-                    <a href="#" class="btnShowDetails">Ver detalles</a>
+                    <span class="<?=$fecha_actual < $fecha_llegada ? "text-green-500" : "text-red-500" ?>">
+                        <?= $fecha_actual < $fecha_llegada ? "Finalizado" : "Pendiente" ?>
+                    </span>
                 </div>
                 
             </div>
         </div>
-        <div class="flightCard shadow-xl">
-            <div class="headerC">
-                <p class="countryTitle"><i class="fa-solid fa-earth-americas mr-[1rem]"></i> El Salvador - Madrid</p>
-                <p class="countryTitle"><i class="fa-solid fa-calendar mr-[1rem]"></i> 30 marzo de 2024</p>
-            </div>
-            <hr>
-            <div class="contentI">
-                <i class="fa-solid fa-plane-departure plane-icon-p"></i>
-                <div>
-                    <p class="hourT">15:30</p>
-                    <p>SAL</p>
-                </div>
-                <div class="separator"></div>
-                <div>
-                    <p class="hourT">22:30</p>
-                    <p>MAD</p>
-                </div>
-                <div class="aditionalinfoC">
-                    <p class="grayText">2 pasajeros</p>
-                    <p class="greenText">Sin escalas</p>
-                    <p class="grayText">Codigo: VL20240321V01</p>
-                </div>
-                <div class="aditionalinfoCC">
-                    <a href="#" class="btnShowDetails">Ver detalles</a>
-                </div>
-                
-            </div>
-        </div>
+        <?php } ?>
     </div>
     <?php include_once("./components/footer.php") ?>
 

@@ -41,6 +41,18 @@ class FlightController{
         }
     }
 
+    public static function getUserFlights($id) {
+        if (empty($id)) {
+            header("Location: ./index.php");
+            exit();
+        }
+        $flightsModel = new Flight();
+
+        $flights = $flightsModel->fetchUserFlights($id);
+
+        return $flights;
+    }
+
     public static function getFlightDetails(){
         $flight_details = [];
     

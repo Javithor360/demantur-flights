@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS demantur_flights DEFAULT CHARACTER SET utf8;
+;CREATE SCHEMA IF NOT EXISTS demantur_flights DEFAULT CHARACTER SET utf8;
 
 DROP DATABASE demantur_flights;
 CREATE DATABASE demantur_flights;
@@ -80,4 +80,5 @@ CREATE TABLE demantur_flights . boleto (
   FOREIGN KEY(id_asiento) REFERENCES demantur_flights . asiento(id_asiento)
 );
 
-SELECT * FROM demantur_flights.usuario;
+SELECT * FROM demantur_flights.horario
+;
