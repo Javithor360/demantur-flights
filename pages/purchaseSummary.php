@@ -3,6 +3,12 @@
     $title = "Información de la Reserva";
     $arg = "<link rel='stylesheet' href='./assets/css/purchaseSummary.css'>";
     include_once("./components/headContent.php"); 
+
+    if(empty($_SESSION['reservation'])) {
+        header("Location: ../index.php");
+    }
+
+    $reservation = $_SESSION['reservation'];
 ?>
 
 <body>
@@ -21,7 +27,7 @@
                 <h2>Información de reservación</h2>
                 <div class="summary-head-id">
                     <h3>Número de reserva:</h3>
-                    <p>WXIKXI</p>
+                    <p><?= $reservation['flight']['codigo'] ?></p>
                 </div>
             </div>
         </section>
@@ -33,21 +39,15 @@
                         <th>Vuelo</th>
                         <th>Origen</th>
                         <th>Destino</th>
-                        <th>Avión</th>
+                        <th>Aerolínea</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>WK 2200</td>
-                        <td>San Salvador, El Salvador</td>
-                        <td>Ciudad de Panamá, Panamá</td>
-                        <td>333</td>
-                    </tr>
-                    <tr>
-                        <td>WK 2200</td>
-                        <td>San Salvador, El Salvador</td>
-                        <td>Ciudad de Panamá, Panamá</td>
-                        <td>333</td>
+                        <td><?= $reservation['flight']['codigo'] ?></td>
+                        <td><?= $reservation['flight']['origen_lugar'] ?></td>
+                        <td><?= $reservation['flight']['destino_lugar'] ?></td>
+                        <td><?= $reservation['flight']['aerolinea_nombre'] ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -59,17 +59,17 @@
                     <tr>
                         <th>Nombre del pasajero</th>
                         <th>Código de ticket</th>
+                        <th>Número de asiento</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Daniel Ernesto Meléndez Serrano</td>
-                        <td>123456</td>
-                    </tr>
-                    <tr>
-                        <td>Alvin Josué Vásquez Ventura</td>
-                        <td>789012</td>
-                    </tr>
+                    <?php foreach($reservation['tickets'] as $passenger) { ?>
+                        <tr>
+                            <td><?= $passenger['nombre_pasajero'] ?></td>
+                            <td><?= $passenger['codigo_boleto'] ?></td>
+                            <td><?= $passenger['nombre_asiento'] ?></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </section>
@@ -85,23 +85,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Vuel. WK2200 San Salvador - Ciudad de Panamá</td>
-                                <td>$325.90</td>
-                            </tr>
-                            <tr>
-                                <td>Vuel. WK2200 San Salvador - Ciudad de Panamá</td>
-                                <td>$325.90</td>
-                            </tr>
-                            <tr>
-                                <td>Servicios de aeropuerto</td>
-                                <td>$65.00</td>
-                            </tr>
+                            <?php 
+                                foreach($reservation['tickets'] as $passenger) {
+                                    echo "<tr>
+                                            <td>Viaje desde " . $reservation['flight']['origen_lugar'] . " hasta " . $reservation['flight']['destino_lugar'] . " <br>Asiento de pasajero - " . $passenger['nombre_pasajero'] . "</td>
+                                            <td>$" . number_format($reservation['flight']['tarifa'], 2) . "</td>
+                                        </tr>";
+                                }
+                            ?>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td>Total</td>
-                                <td>$981.80</td>
+                                <td><?= $reservation['flight']['tarifa'] * count($reservation['tickets']) ?></td>
                             </tr>
                         </tfoot>
                     </table>

@@ -10,6 +10,10 @@ if(isset($_GET['info'])) {
         $msg = "Por favor, selecciona un asiento para cada pasajero.";
     }
 }
+
+if(empty($_SESSION['selected_flight'])) {
+    $msg = "No se ha seleccionado un vuelo.";
+}
 ?>
 
 <body>
@@ -17,7 +21,7 @@ if(isset($_GET['info'])) {
     <div class="siteLayout">
         <main class="mainContainer">
             <div>
-                <p class="psgTitle marginL">Vuelo de <?php echo $_SESSION['selected_flight']['origen_lugar'] ?> hasta <?php echo $_SESSION['selected_flight']['destino_lugar'] ?></p>
+                <p class="psgTitle marginL"> <?php echo isset($_SESSION['selected_flight']) ? "Vuelo de " . $_SESSION['selected_flight']['origen_lugar'] . " hasta " . $_SESSION['selected_flight']['destino_lugar'] : "Vuelo desconocido" ?></p>
                 <div class="splitMsgContainer marginL">
                     <i class="fa-solid fa-person-walking-luggage lightIcon"></i>
                     <div class="subdivision"></div>
@@ -32,21 +36,23 @@ if(isset($_GET['info'])) {
             <div class="seatSelectionContainer">
                 <div class="passengersSide">
                     <div id="passengerList">
-                        <form action="../controllers/flight.controller.php" method="POST" class="hidden-form">
+                        <form action="<?php echo isset($_SESSION['selected_passengers']) ? "../controllers/flight.controller.php" : "./flights.php" ?>" method="POST" class="hidden-form">
                             <input type='hidden' name='action' value='update_seat_selection' />
                             <div>
                                 <?php
-                                foreach ($_SESSION['selected_passengers'] as $index => $passengerData) {
-                                    $passenger = $passengerData['names'] . " " . $passengerData['lastNames'];
-                                    echo "<div class='passengerNameCard' onclick='selectPassenger(event)' data-passenger-id='$index'>
-                                    <div class='numCircleDiv'>" . ($index + 1) . "</div>
-                                        <div class='seat-info'>
-                                            <span>{$passenger} - Asiento: </span>
-                                            <span class='seat-number'>" . $passengerData['seat'] . "</span>
-                                        </div>
-                                        <input type='hidden' name='passenger_id_$index' value='$index' />
-                                        <input type='hidden' name='selected_seat_$index' class='hidden-seat-input_$index' value='{$passengerData['seat']}' />
-                                    </div>";
+                                if(isset($_SESSION['selected_passengers'])) {
+                                    foreach ($_SESSION['selected_passengers'] as $index => $passengerData) {
+                                        $passenger = $passengerData['names'] . " " . $passengerData['lastNames'];
+                                        echo "<div class='passengerNameCard' onclick='selectPassenger(event)' data-passenger-id='$index'>
+                                        <div class='numCircleDiv'>" . ($index + 1) . "</div>
+                                            <div class='seat-info'>
+                                                <span>{$passenger} - Asiento: </span>
+                                                <span class='seat-number'>" . $passengerData['seat'] . "</span>
+                                            </div>
+                                            <input type='hidden' name='passenger_id_$index' value='$index' />
+                                            <input type='hidden' name='selected_seat_$index' class='hidden-seat-input_$index' value='{$passengerData['seat']}' />
+                                        </div>";
+                                    }
                                 }
                                 ?>
                             </div>

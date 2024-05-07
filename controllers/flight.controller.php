@@ -82,6 +82,7 @@ class FlightController{
             );
 
             header("Location: ../pages/flights.php");
+            exit();
         }
     }
 
@@ -111,6 +112,7 @@ class FlightController{
 
             // print_r($_SESSION['flight']);
             header("Location: ../pages/passengerForm.php");
+            exit();
         }
     }
 
@@ -140,6 +142,7 @@ class FlightController{
             $_SESSION['selected_passengers'] = $passangersData;
 
             header("Location: ../pages/seatsSelection.php");
+            exit();
         }
     }
 
@@ -156,6 +159,33 @@ class FlightController{
 
             // print_r($_SESSION['selected_passengers']);
             header("Location: ../pages/payments.php");
+            exit();
         }
     }
+
+    public function save_flight_reservation() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (empty($_SESSION['selected_flight']) || empty($_SESSION['selected_passengers'])) {
+                header("Location: ../pages/flights.php");
+                exit();
+            }
+    
+            $client_id = $_SESSION['user']['id_usuario'];
+            $flight = $_SESSION['selected_flight'];
+            $passengers = $_SESSION['selected_passengers'];
+    
+            $flightModel = new Flight();
+            $purchased_flight = $flightModel->saveFlightReservation($client_id, $flight, $passengers);
+
+            $_SESSION['reservation'] = $purchased_flight;
+
+            unset($_SESSION['last_search']);
+            unset($_SESSION['selected_flight']);
+            unset($_SESSION['selected_passengers']);
+
+            header("Location: ../pages/../pages/purchaseSummary.php");
+            exit();
+        }
+    }
+    
 }

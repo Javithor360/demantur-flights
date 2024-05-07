@@ -174,7 +174,8 @@ class Flight
     }
 
     // Fetch flight by id
-    public function fetchFlightById($id) {
+    public function fetchFlightById($id)
+    {
         $pdo = $this->connection->connect();
         $flight = null;
 
@@ -231,6 +232,103 @@ class Flight
         }
 
         return false;
+    }
+
+    // Make the corresponding flight reservation
+    public function saveFlightReservation($client_id, $flightData, $passengers)
+    {
+        $pdo = $this->connection->connect();
+        $pdo->beginTransaction();
+
+        $tickets = [];
+
+        try {
+            foreach ($passengers as $passenger) {
+                $seatSQL = "INSERT INTO asiento (numero_asiento, id_vuelo) VALUES (:numero_asiento, :id_vuelo);";
+                $stmt = $pdo->prepare($seatSQL);
+                $stmt->bindParam(":numero_asiento", $passenger['seat']);
+                $stmt->bindParam(":id_vuelo", $flightData['id_vuelo']);
+
+                if ($stmt->execute()) {
+                    $passenger['id_asiento'] = $pdo->lastInsertId();
+                    $passenger_name = $passenger['names'] . ' ' . $passenger['lastNames'];
+                    $ticket_code = $this->generateRandomCode();
+
+                    $sql = "INSERT INTO boleto (id_comprador, fecha_compra, codigo_boleto, id_asiento, nombre_pasajero, documento_identidad)
+                        VALUES (:id_comprador, NOW(), :codigo_boleto, :id_asiento, :nombre_pasajero, :documento_identidad);";
+
+                    $stmt2 = $pdo->prepare($sql);
+                    $stmt2->bindParam(":id_comprador", $client_id);
+                    $stmt2->bindParam(":codigo_boleto", $ticket_code);
+                    $stmt2->bindParam(":id_asiento", $passenger['id_asiento']);
+                    $stmt2->bindParam(":nombre_pasajero", $passenger_name);
+                    $stmt2->bindParam(":documento_identidad", $passenger['document']);
+
+                    if ($stmt2->execute()) {
+                        // Guardar información del boleto
+                        $ticketId = $pdo->lastInsertId();
+                        $tickets[] = $this->getTicketInfoById($ticketId);
+
+                        $pdo->commit();
+                    } else {
+                        $pdo->rollBack();
+                        return false;
+                    }
+                } else {
+                    $pdo->rollBack();
+                    return false;
+                }
+            }
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return false;
+        }
+
+        // Obtener información del vuelo
+        $flightInfo = $this->fetchFlightById($flightData['id_vuelo']);
+
+        return array(
+            'flight' => $flightInfo,
+            'tickets' => $tickets
+        );
+    }
+
+
+
+    public function getTicketInfoById($ticketId)
+    {
+        $pdo = $this->connection->connect();
+
+        $sql = "SELECT b.*, a.numero_asiento AS nombre_asiento
+                FROM boleto b
+                INNER JOIN asiento a ON b.id_asiento = a.id_asiento 
+                WHERE id_boleto = :id_boleto";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":id_boleto", $ticketId);
+        $stmt->execute();
+
+        $ticketInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $ticketInfo;
+    }
+
+
+    function generateRandomCode()
+    {
+        // Generar cuatro letras aleatorias mayúsculas
+        $letters = range('A', 'Z');
+        $random_letters = '';
+        for ($i = 0; $i < 3; $i++) {
+            $random_letters .= $letters[rand(0, count($letters) - 1)];
+        }
+
+        // Obtener la fecha actual en el formato especificado (YYmmdd)
+        $date = date('ymd');
+
+        // Combinar las letras aleatorias y la fecha
+        $random_code = $random_letters . $date;
+
+        return $random_code;
     }
 
     // Setters

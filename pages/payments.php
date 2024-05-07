@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+
+if(isset($_GET['info'])) {
+    if ($_GET['info'] === 'error_payment') {
+        $msg = "Ha ocurrido un error al procesar el pago, inténtalo más tarde.";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,7 +30,15 @@ session_start();
                 <h2 class="mb-2 text-2xl font-semibold">Pagar y confirmar reserva</h2>
                 <p class="mb-6 text-lg text-gray-600">Elige tu método de pago favorito.</p>
 
-                <form action="./infoCard.php" method="POST">
+                <?php 
+                    if(isset($msg)) { ?>
+                        <div class="p-5 mt-4 bg-red-100 border-2 border-red-400">
+                            <p class='error-msg'><?= $msg ?></p>
+                        </div>
+                    <?php }
+                ?>
+
+                <form action="../controllers/flight.controller.php" method="POST">
                     <div class="mb-6">
                         <h3 class="mb-4 text-lg font-semibold">Datos de facturación</h3>
                         <input type="email" name="email" placeholder="Correo electrónico" class="w-full p-4 mb-4 border rounded-lg" required>
@@ -38,6 +53,7 @@ session_start();
                     </div>
 
                     <div class="flex items-center">
+                        <input type="hidden" name="action" value="save_flight_reservation" />
                         <button class="px-6 py-3 font-semibold text-white bg-green-600 rounded-lg cursor-pointer hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50" type="submit">Confirmar y pagar</button>
                         <p class="ml-4 text-sm text-green-600"><i class="mr-1 fas fa-lock"></i>Usamos métodos de confianza para procesar tus pagos de forma segura.</p>
                     </div>
