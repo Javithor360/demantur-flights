@@ -40,7 +40,7 @@ if(empty($_SESSION['selected_flight'])) {
             <div class="seatSelectionContainer">
                 <div class="passengersSide">
                     <div id="passengerList">
-                        <form action="<?php echo isset($_SESSION['selected_passengers']) ? "../controllers/flight.controller.php" : "./flights.php" ?>" method="POST" class="hidden-form">
+                        <form action="<?php echo isset($_SESSION['selected_flight']) ? "../controllers/flight.controller.php" : "../index.php" ?>" method="POST" class="hidden-form">
                             <input type='hidden' name='action' value='update_seat_selection' />
                             <div>
                                 <?php
