@@ -1,9 +1,25 @@
 <?php
-require_once("../../models/flightModel.php");
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+require_once(__DIR__ . "../../models/class.flight.php");
+
+$controller = new FlightController();
+
+if (isset($_POST['action']) || isset($_GET['action'])) {
+    $action = $_POST['action'] ?? $_GET['action'];
+    if (method_exists($controller, $action)) {
+        $controller->$action();
+    } else {
+        echo "Error: No existe el método $action en el controlador";
+    }
+}
 
 class FlightController{
     public static function getFlights($type){
-        $flight = new flight(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        $flight = new Flight(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         try {
             return $flight->fetchFlights($type);
@@ -48,5 +64,36 @@ class FlightController{
         }
     
         return $flight_details;
+    }
+
+    public function filter_flight() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (empty($_POST['lugar']) || empty($_POST['fecha_salida'])) {
+                header("Location: ./index.php");
+                exit();
+            }
+
+            $lugar = $_POST['lugar'];
+            $fecha_salida = $_POST['fecha_salida'];
+
+            $_SESSION['last_search'] = array(
+                'lugar' => $lugar,
+                'fecha_salida' => $fecha_salida
+            );
+
+            header("Location: ../pages/flights.php");
+        }
+    }
+
+    public static function flight_search($destination, $departure_date) {
+        if (empty($destination) || empty($departure_date)) {
+            header("Location: ./flights.php");
+            exit();
+        }
+
+        $flightsModel = new Flight();
+        $flights = $flightsModel->fetchMatchingFlights($destination, $departure_date);
+
+        return $flights;
     }
 }

@@ -1,7 +1,7 @@
 <?php 
     $title = "Admin";
     $focus = "Inicio";
-    require_once("../../controllers/flightController.php");
+    require_once("../../controllers/flight.controller.php");
     $commingflight = FlightController::getFlights(true);
     $pastflight = FlightController::getFlights(false);   
     $arg = "<link rel='stylesheet' href='./assets/css/admin.css'>";
@@ -39,7 +39,7 @@
                 <div class="w-[40%] flex items-center"><hr class="w-full h-1 bg-[#76ABAE]"></div>
             </div>
             <div class="overflow-x-auto overflow-y-auto shadow-md sm:rounded-lg w-[80%] mx-auto mb-8 max-h-[30rem]">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                <table class="w-full text-sm text-left text-gray-500 rtl:text-right">
                     <thead class="sticky top-0 text-xs text-[#fff] uppercase bg-[#31363F]">
                         <tr>
                             <th scope="col" class="px-6 py-3">
@@ -68,7 +68,7 @@
                     <?php if (!empty($commingflight)) { ?>
                     <tbody>
                         <?php foreach ($commingflight as $flights): ?>
-                            <tr class="odd:bg-white even:bg-gray-50 border-b">
+                            <tr class="border-b odd:bg-white even:bg-gray-50">
                                 <th scope="row" class="px-6 py-4 font-medium text-[#222831] whitespace-nowrap">
                                     <?php echo $flights->getCodigoVuelo(); ?>
                                 </th>
@@ -132,7 +132,7 @@
                 <div class="w-[40%] flex items-center"><hr class="w-full h-1 bg-[#76ABAE]"></div>
             </div>
             <div class="overflow-x-auto overflow-y-auto shadow-md sm:rounded-lg w-[80%] mx-auto mb-8 max-h-[20rem]">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                <table class="w-full text-sm text-left text-gray-500 rtl:text-right ">
                     <thead class="sticky top-0 text-xs text-[#fff] uppercase bg-[#31363F]">
                         <tr>
                             <th scope="col" class="px-6 py-3">
@@ -161,7 +161,7 @@
                     <?php if (empty(!$pastflight)) { ?>
                     <tbody>
                         <?php foreach ($pastflight as $flights): ?>
-                            <tr class="odd:bg-white even:bg-gray-50 border-b">
+                            <tr class="border-b odd:bg-white even:bg-gray-50">
                                 <th scope="row" class="px-6 py-4 font-medium text-[#222831] whitespace-nowrap">
                                     <?php echo $flights->getCodigoVuelo(); ?>
                                 </th>

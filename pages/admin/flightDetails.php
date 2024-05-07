@@ -4,7 +4,7 @@
     $description = "Detalles de pasajeros, y horarios y del vuelo en general";
     $type = "Vuelo";
     $arg = "<link rel='stylesheet' href='./assets/css/admin.css'>";
-    require_once("../../controllers/flightController.php");
+    require_once("../../controllers/flight.controller.php");
     if (empty($_POST['id_vuelo'])) {
         header("Location: index.php");
         exit;
@@ -24,7 +24,7 @@
             </div>
             
             <div class="overflow-x-auto overflow-y-auto shadow-md sm:rounded-lg w-[95%] ml-8 mb-8 max-h-[30rem]">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                <table class="w-full text-sm text-left text-gray-500 rtl:text-right">
                     <thead class="sticky top-0 text-xs text-[#fff] uppercase bg-[#31363F]">
                         <tr>
                             <th scope="col" class="px-6 py-3">
@@ -62,13 +62,13 @@
                     <tbody>
                         <?php
                             if(isset($flight_details['error'])) {
-                                echo "<tr colspan='10' class='odd:bg-white even:bg-gray-50 border-b w-full'>
-                                <td colspan='10' class='px-6 py-4 font-medium whitespace-nowrap text-red-500 w-full text-center'>
+                                echo "<tr colspan='10' class='w-full border-b odd:bg-white even:bg-gray-50'>
+                                <td colspan='10' class='w-full px-6 py-4 font-medium text-center text-red-500 whitespace-nowrap'>
                                     [!] {$flight_details['error']}
                                 </td>
                               </tr>";
                             } else {
-                        ?>      <tr class="odd:bg-white even:bg-gray-50 border-b">
+                        ?>      <tr class="border-b odd:bg-white even:bg-gray-50">
                                     <td scope="row" class="px-6 py-4 font-medium text-[#222831] whitespace-nowrap">
                                         <?php echo $flight_details['flight_code']; ?>
                                     </td>
@@ -119,7 +119,7 @@
                 <div class="w-[40%] flex items-center"><hr class="w-full h-1 bg-[#76ABAE]"></div>
             </div>
             <div class="overflow-x-auto overflow-y-auto shadow-md sm:rounded-lg w-[80%] mx-auto mb-8 max-h-[20rem]">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                <table class="w-full text-sm text-left text-gray-500 rtl:text-right ">
                 <thead class="sticky top-0 text-xs text-[#fff] uppercase bg-[#31363F]">
                         <tr>
                             <th scope="col" class="px-6 py-3">
@@ -139,8 +139,8 @@
                     <tbody>
                         <?php
                             if(isset($flight_details['error'])) {
-                                echo "<tr colspan='10' class='odd:bg-white even:bg-gray-50 border-b w-full'>
-                                <td colspan='10' class='px-6 py-4 font-medium whitespace-nowrap text-red-500 w-full text-center'>
+                                echo "<tr colspan='10' class='w-full border-b odd:bg-white even:bg-gray-50'>
+                                <td colspan='10' class='w-full px-6 py-4 font-medium text-center text-red-500 whitespace-nowrap'>
                                     [!] {$flight_details['error']}
                                 </td>
                               </tr>";
@@ -156,7 +156,7 @@
                             <?php } else {?>
 
                                 <?php foreach ($passengers_details as $passenger): ?>
-                                    <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                    <tr class="border-b odd:bg-white even:bg-gray-50">
                                         <td class="px-6 py-4 font-medium text-[#222831]"><?php echo $passenger['codigo_boleto']; ?></td>
                                         <td class="px-6 py-4"><?php echo $passenger['fecha_compra']; ?></td>
                                         <td class="px-6 py-4"><?php echo $passenger['nombre_pasajero']; ?></td>

@@ -1,6 +1,8 @@
 <?php 
     // Iniciando la sesión para usarla en cualquier página
-    session_start();
+    if (!isset($_SESSION)) {
+        session_start();
+    }
 
     // Validando que solo los administradores puedan acceder al panel
     if (!isset($_SESSION['user']) || $_SESSION['user']['id_usuario'] !== "admin") {
