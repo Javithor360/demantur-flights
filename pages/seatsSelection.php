@@ -18,6 +18,7 @@ if(empty($_SESSION['selected_flight'])) {
 
     $occupiedSeats = isset($_SESSION['selected_flight']) ? FlightController::getOccupiedSeats($_SESSION['selected_flight']['id_vuelo']) : []; // Obtener los asientos ocupados
 // print_r($occupiedSeats);
+
 ?>
 
 <body>

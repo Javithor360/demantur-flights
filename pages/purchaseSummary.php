@@ -106,7 +106,6 @@
                     <p>Los elementos comprados no son reembolsables. </p>
                     <p>Están sujetos a cambios y disponibilidad.</p>
                     <span><p>¡Ten un excelente vuelo!</p></span>
-                    <p>Pago efectuado con la tarjeta terminada en 9999</p>
                 </div>
             </div>
         </section>
