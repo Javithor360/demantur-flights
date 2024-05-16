@@ -1,8 +1,9 @@
 <html lang="es">
 <?php 
+    session_start();
     $title = "Información de la Reserva";
     $arg = "<link rel='stylesheet' href='./assets/css/purchaseSummary.css'>";
-    include_once("./components/headContent.php"); 
+    include_once("./components/headContent.php");
 
     if(empty($_SESSION['reservation'])) { // Si no hay una reserva en la sesión, redirigir al index
         header("Location: ../index.php");

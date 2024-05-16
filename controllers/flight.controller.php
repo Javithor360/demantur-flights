@@ -195,7 +195,8 @@ class FlightController{
             unset($_SESSION['selected_flight']);
             unset($_SESSION['selected_passengers']);
 
-            header("Location: ../pages/../pages/purchaseSummary.php");
+            print_r($purchased_flight);
+            header("Location: ../pages/purchaseSummary.php");
             exit();
         }
     }

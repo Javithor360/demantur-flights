@@ -22,19 +22,21 @@
             <div class="heroText">Gestiona tus vuelos reservados</div>
         </div>
     </div>
-    <div class="ticketsContainer shadow-xl">
-        <p class="ml-[15rem] text-[#31363F] font-bold text-[3rem]">Próximos</p> 
+    <div class="ticketsContainer shadow-xl overflow-y-auto pb-20">
+        <p class="ml-[15rem] text-[#31363F] font-bold text-[3rem]">Próximos</p>
         <hr class="style-one">
-        <?php foreach ($flights as $flight) { ?>
-        <?php
-            $fecha_actual = new DateTime();
-            // Convertir la fecha proporcionada a un objeto DateTime
-            $fecha_llegada = new DateTime($flight->getFechaLlegada());
+        <?php 
+        if (empty($flights)) {
+            echo '<div class="text-center p-5 text-gray-500">No tienes vuelos reservados.</div>';
+        } else {
+            foreach ($flights as $flight) {
+                $fecha_actual = new DateTime();
+                $fecha_llegada = new DateTime($flight->getFechaLlegada());
         ?>
         <div class="flightCard shadow-xl">  
             <div class="headerC">
                 <p class="countryTitle"><i class="fa-solid fa-earth-americas mr-[1rem]"></i> <?= $flight->getOrigen() ?> - <?= $flight->getDestino() ?></p>
-                <p class="countryTitle"><i class="fa-solid fa-calendar mr-[1rem]"></i> <?= strftime('%e de %B de %Y', strtotime($flight->getFechaSalida())) ?> </p>
+                <p class="countryTitle"><i class="fa-solid fa-calendar mr-[1rem]"></i> <?= date('j \d\e F \d\e Y', strtotime($flight->getFechaSalida())) ?> </p>
             </div>
             <hr>
             <div class="contentI">
@@ -52,32 +54,29 @@
                     <p class="grayText">Codigo: <?= $flight->getCodigoVuelo() ?></p>
                 </div>
                 <div class="aditionalinfoCC">
-                    <span class="<?=$fecha_actual < $fecha_llegada ? "text-green-500" : "text-red-500" ?>">
-                        <?= $fecha_actual < $fecha_llegada ? "Finalizado" : "Pendiente" ?>
+                    <span class="<?=$fecha_actual > $fecha_llegada ? "text-green-500" : "text-red-500" ?>">
+                        <?= $fecha_actual > $fecha_llegada ? "Finalizado" : "Pendiente" ?>
                     </span>
                 </div>
                 
             </div>
         </div>
-        <?php } ?>
+        <?php 
+            }
+        }
+        ?>
     </div>
     <?php include_once("./components/footer.php") ?>
-
     <!-- Modal -->
     <div id="detailsModal" class="modal">
-        <!-- Contenido del modal -->
         <div class="modal-content">
             <span class="close">&times;</span>
             <p>Detalles del vuelo...</p>
         </div>
     </div>
-
-
     <script>
         let modal = document.getElementById("detailsModal");
-
         let btns = document.getElementsByClassName("btnShowDetails");
-
         let span = document.getElementsByClassName("close")[0];
 
         for (var i = 0; i < btns.length; i++) {

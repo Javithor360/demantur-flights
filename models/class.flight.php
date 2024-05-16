@@ -94,38 +94,37 @@ class Flight
     {
         $pdo = $this->connection->connect(); // Se inicia la conexión con la base de datos
         $sql = "
-        SELECT 
-            v.id_vuelo,
-            v.codigo AS codigo_vuelo,
-            DATE(h.hora_salida) AS fecha_salida,
-            TIME(h.hora_salida) AS hora_salida,
-            DATE(h.hora_llegada) AS fecha_llegada,
-            TIME(h.hora_llegada) AS hora_llegada,
-            orig.lugar AS origen,
-            orig.aeropuerto AS aeropuerto_origen,
-            dest.lugar AS destino,
-            dest.aeropuerto AS aeropuerto_destino,
-            a.nombre AS aerolinea,
-            av.codigo_avion AS tipo_avion,
-            v.tarifa AS precio_boleto,
-            v.finalizado
-        FROM 
-            vuelo v
-        JOIN 
-            horario h ON v.id_horario = h.id_horario
-        JOIN 
-            destino orig ON h.id_origen = orig.id_destino
-        JOIN 
-            destino dest ON h.id_destino = dest.id_destino
-        JOIN 
-            avion av ON v.id_avion = av.id_avion
-        JOIN 
-            aerolinea a ON av.id_aerolinea = a.id_aerolinea
-        JOIN
-            usuario us ON us.id_usuario = $id";
+            SELECT
+                v.id_vuelo,
+                v.codigo AS codigo_vuelo,
+                DATE(h.hora_salida) AS fecha_salida,
+                TIME(h.hora_salida) AS hora_salida,
+                DATE(h.hora_llegada) AS fecha_llegada,
+                TIME(h.hora_llegada) AS hora_llegada,
+                d2.lugar AS origen,
+                d2.aeropuerto AS aeropuerto_origen,
+                d1.lugar AS destino,
+                d2.aeropuerto AS aeropuerto_destino,
+                a.nombre AS aerolinea,
+                av.codigo_avion AS tipo_avion,
+                v.tarifa AS precio_boleto,
+                v.finalizado
+            FROM
+                vuelo v
+                JOIN horario h ON v.id_horario = h.id_horario
+                JOIN destino d1 ON h.id_destino = d1.id_destino
+                JOIN destino d2 ON h.id_origen = d2.id_destino
+                JOIN avion av ON v.id_avion = av.id_avion
+                JOIN aerolinea a ON av.id_aerolinea = a.id_aerolinea
+                JOIN asiento asi ON v.id_vuelo = asi.id_vuelo
+                JOIN boleto b ON b.id_asiento = asi.id_asiento
+                JOIN usuario u ON b.id_comprador = u.id_usuario
+            WHERE
+                u.id_usuario = :id";
 
         // Se prepara la consulta y seguidamente se ejecuta
         $statement = $pdo->prepare($sql);
+        $statement->bindParam(":id", $id);
         $statement->execute();
 
         // Se obtienen los datos de los vuelos en un array asociativo
@@ -333,8 +332,6 @@ class Flight
                         // Guardar información del boleto
                         $ticketId = $pdo->lastInsertId();
                         $tickets[] = $this->getTicketInfoById($ticketId);
-
-                        $pdo->commit();
                     } else {
                         $pdo->rollBack();
                         return false;
@@ -344,8 +341,11 @@ class Flight
                     return false;
                 }
             }
+
+            $pdo->commit(); // Commit después de que se hayan insertado todos los boletos correctamente
         } catch (Exception $e) {
             $pdo->rollBack();
+            echo $e;
             return false;
         }
 
@@ -377,7 +377,8 @@ class Flight
     }
 
     // Fetch the occupied seats of a flight
-    public function fetchOccupiedSeats($flight_id) {
+    public function fetchOccupiedSeats($flight_id)
+    {
         $pdo = $this->connection->connect();
 
         $sql = "SELECT a.numero_asiento

@@ -4,7 +4,7 @@
 class Database {
     private $host ="localhost:3306";
     private $user  = "root";
-    private $password = "12345";
+    private $password = "";
     private $database = "demantur_flights";
     private $connection;
 
